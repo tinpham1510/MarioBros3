@@ -26,6 +26,7 @@
 
 
 #include "Mario.h"
+#include"LoadMap.h"
 
 
 #define WINDOW_CLASS_NAME L"SampleWindow"
@@ -33,17 +34,21 @@
 #define WINDOW_ICON_PATH L"mario.ico"
 
 #define BACKGROUND_COLOR D3DXCOLOR(200.0f/255, 200.0f/255, 255.0f/255,0.0f)
-#define SCREEN_WIDTH 320
-#define SCREEN_HEIGHT 240
+#define SCREEN_WIDTH 600
+#define SCREEN_HEIGHT 450
 
 #define ID_TEX_MARIO 0
 #define ID_TEX_ENEMY 10
 #define ID_TEX_MISC 20
+#define ID_TEX_MAP 30
 
 #define TEXTURES_DIR L"textures"
 #define TEXTURE_PATH_MARIO TEXTURES_DIR "\\mario.png"
 #define TEXTURE_PATH_MISC TEXTURES_DIR "\\misc.png"
 #define TEXTURE_PATH_ENEMIES TEXTURES_DIR "\\enemies.png"
+#define TEXTURE_PATH_MAP TEXTURES_DIR "\\Map1-1.png"
+
+#define DATA_PATH_MAP TEXTURES_DIR "\\Map1.txt"
 
 CMario *mario;
 #define MARIO_START_X 10.0f
@@ -51,7 +56,7 @@ CMario *mario;
 #define MARIO_START_VX 0.1f
 
 CBrick *brick;
-
+LoadMap* map;
 LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message) {
@@ -77,10 +82,15 @@ void LoadResources()
 	//textures->Add(ID_ENEMY_TEXTURE, TEXTURE_PATH_ENEMIES, D3DCOLOR_XRGB(156, 219, 239));
 	textures->Add(ID_TEX_MISC, TEXTURE_PATH_MISC);
 
+	//MAP
+	textures->Add(ID_TEX_MAP, TEXTURE_PATH_MAP);
+
 
 	CSprites * sprites = CSprites::GetInstance();
 	
 	LPTEXTURE texMario = textures->Get(ID_TEX_MARIO);
+
+	
 
 	// readline => id, left, top, right 
 
@@ -125,6 +135,7 @@ void LoadResources()
 	
 	mario = new CMario(MARIO_START_X, MARIO_START_Y, MARIO_START_VX);
 	brick = new CBrick(100.0f, 100.0f);
+	map = new LoadMap(ID_TEX_MAP, DATA_PATH_MAP, 27, 176, 11, 11);
 }
 
 /*
@@ -155,9 +166,10 @@ void Render()
 		// Use Alpha blending for transparent sprites
 		FLOAT NewBlendFactor[4] = { 0,0,0,0 };
 		pD3DDevice->OMSetBlendState(g->GetAlphaBlending(), NewBlendFactor, 0xffffffff);
-
+		map->DrawMap();
 		brick->Render();
 		mario->Render();
+		
 
 		// Uncomment this line to see how to draw a porttion of a texture  
 		//g->Draw(10, 10, texMisc, 300, 117, 316, 133);
