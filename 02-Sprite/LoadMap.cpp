@@ -61,6 +61,6 @@ void LoadMap::DrawMap()
 			r.top = y * FrameHeight;
 			r.right = r.left + FrameWidth;
 			r.bottom = r.top + FrameHeight;
-			CGame::GetInstance()->Draw((j * FrameWidth), (i * FrameHeight), CTextures::GetInstance()->Get(id), r.left, r.top, r.right, r.bottom);
+			CGame::GetInstance()->Draw((j * FrameWidth), (i * FrameHeight) - 272, CTextures::GetInstance()->Get(id), r.left, r.top, r.right, r.bottom);
 		}
 }
