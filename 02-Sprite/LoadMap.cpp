@@ -43,12 +43,12 @@ void LoadMap::ReadMap()
 }
 void LoadMap::DrawMap()
 {
-	for (int i = 0; i < rows; i++)
-		for (int j = 0; j < collumns; j++)
+	for (UINT i = 0; i < rows; i++)
+		for (UINT j = 0; j < collumns; j++)
 		{
 			RECT r;
-			int x = (TileMapID[i][j] - 1) % TileSetWidth;// nums column in Map1-1
-			int y; // nums row in Map 1-1
+			UINT x = (TileMapID[i][j] - 1) % TileSetWidth;// nums column in Map1-1
+			UINT y; // nums row in Map 1-1
 			if (TileMapID[i][j] % TileSetWidth == 0)
 			{
 				y = floor((TileMapID[i][j] - 1) / TileSetWidth);
@@ -61,6 +61,6 @@ void LoadMap::DrawMap()
 			r.top = y * FrameHeight;
 			r.right = r.left + FrameWidth;
 			r.bottom = r.top + FrameHeight;
-			CGame::GetInstance()->Draw((float)(j * FrameWidth), (float)(i * FrameHeight), CTextures::GetInstance()->Get(id), r.left, r.top, r.right, r.bottom);
+			CGame::GetInstance()->Draw((j * FrameWidth), (i * FrameHeight), CTextures::GetInstance()->Get(id), r.left, r.top, r.right, r.bottom);
 		}
 }
