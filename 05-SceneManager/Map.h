@@ -2,6 +2,7 @@
 #include"Textures.h"
 #include "Game.h"
 #include "Sprites.h"
+#include "Utils.h"
 #include <fstream>
 #include <iostream>
 
@@ -9,7 +10,7 @@
 #define FrameWidth	16
 #define MAX	300
 
-class LoadMap
+class Map
 {
 	LPCWSTR FilepathMap;
 	int id;
@@ -22,9 +23,10 @@ class LoadMap
 	int TileMapID[MAX][MAX];
 
 public:
-	LoadMap();
+	Map(int ID, LPCWSTR Filepath, int Rows, int Cols, int Tiles, int TileColumn);
 	void ReadMap();
 	void DrawMap();
 	void Load();
-	~LoadMap();
+	int GetMapWidth() { return collumns * TileSetWidth; }
+	~Map();
 };

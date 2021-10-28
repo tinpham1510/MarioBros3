@@ -1,16 +1,23 @@
-﻿#include"LoadMap.h"
-LoadMap::LoadMap()
+#include"Map.h"
+#include "AssetIDs.h"
+#include "Camera.h"
+#include "debug.h"
+Map::Map(int ID, LPCWSTR Filepath, int Rows, int Cols, int Tiles, int TileColumn)
 {
-
+	this->id = ID;
+	this->FilepathMap = Filepath;
+	this->rows = Rows;
+	this->collumns = Cols;
+	this->TileSetWidth = Tiles;
 
 
 	ReadMap();
 	Load();
 	//DrawMap();
 }
-void LoadMap::Load() {
+void Map::Load() {
 	std::ifstream f;
-	f.open("textures\\Map1-1.txt");
+	f.open(FilepathMap);
 	for (int i = 0; i < rows; i++)
 	{
 		for (int j = 0; j < collumns; j++)
@@ -20,10 +27,11 @@ void LoadMap::Load() {
 	}
 }
 
-void LoadMap::ReadMap()
+void Map::ReadMap()
 {
-	CTextures::GetInstance()->Add(30, L"textures\\Map1-1.png");
-	/*int id_sprite = 1;
+	CTextures* texture = CTextures::GetInstance();
+	LPTEXTURE texMap = texture->Get(id);
+	int id_sprite = 1;
 	for (UINT i = 0; i < TileSetWidth; i++)
 	{
 		for (UINT j = 0; j < TileSetWidth; j++)
@@ -32,15 +40,21 @@ void LoadMap::ReadMap()
 			CSprites::GetInstance()->Add(id_Sprites, FrameWidth * j, FrameHeight * i, FrameWidth * (j + 1), FrameHeight * (i + 1), texMap);
 			id_sprite = id_sprite + 1;
 		}
-	}*/
-	
+	}
+
 
 }
-void LoadMap::DrawMap()
+void Map::DrawMap()
 {
+	CSprites* sprites = CSprites::GetInstance();
+	int firstcol = (int)Camera::GetInstance()->GetCamPosX() /8 ;
+	
+	if (firstcol < 0) { firstcol = 0; }
+	int lastcol = firstcol + 20;
 	for (UINT i = 0; i < rows; i++)
-		for (UINT j = 0; j < collumns; j++)
+		for (UINT j = firstcol; j < lastcol; j++)
 		{
+			
 			RECT r;
 			UINT x = (TileMapID[i][j] - 1) % TileSetWidth;// nums column in Map1-1
 			UINT y; // nums row in Map 1-1
@@ -56,6 +70,6 @@ void LoadMap::DrawMap()
 			r.top = y * FrameHeight;
 			r.right = r.left + FrameWidth;
 			r.bottom = r.top + FrameHeight;
-			CGame::GetInstance()->Draw((j * FrameWidth), (i * FrameHeight) - 272, CTextures::GetInstance()->Get(id), r.left, r.top, r.right, r.bottom);
+			CGame::GetInstance()->Draw((j * FrameWidth), (i * FrameHeight) - 238, CTextures::GetInstance()->Get(id), r.left, r.top, r.right, r.bottom);
 		}
 }

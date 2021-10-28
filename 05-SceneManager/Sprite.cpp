@@ -1,5 +1,5 @@
 #include "Sprite.h"
-
+#include "Camera.h"
 CSprite::CSprite(int id, int left, int top, int right, int bottom, LPTEXTURE tex)
 {
 	this->id = id;

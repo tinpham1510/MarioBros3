@@ -2,6 +2,31 @@
 
 #include "Sprite.h"
 #include "Sprites.h"
+#include "Textures.h"
+#include "Camera.h"
+#include "Game.h"
+
+void CPlatform::RenderBoundingBox(){
+	D3DXVECTOR3 p(x, y, 0);
+	RECT rect;
+
+	LPTEXTURE bbox = CTextures::GetInstance()->Get(ID_TEX_BBOX);
+
+	float l, t, r, b;
+
+	GetBoundingBox(l, t, r, b);
+	rect.left = 0;
+	rect.top = 0;
+	rect.right = (int)r - (int)l;
+	rect.bottom = (int)b - (int)t;
+
+	float cx, cy;
+	Camera::GetInstance()->GetCamPos(cx, cy);
+
+	float xx = x - this->cellWidth / 2 + rect.right / 2;
+
+	CGame::GetInstance()->Draw(xx - cx, y - cy, bbox, NULL, BBOX, rect.right - 1, rect.bottom - 1);
+}
 
 void CPlatform::Render()
 {
@@ -20,7 +45,7 @@ void CPlatform::Render()
 		s->Get(this->spriteIdEnd)->Draw(xx, y);
 
 	//
-	//RenderBoundingBox();
+	RenderBoundingBox();
 	//
 }
 
