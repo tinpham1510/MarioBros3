@@ -10,5 +10,6 @@ public:
 	virtual int GetWidth() { return width; };
 	virtual void Render();
 	virtual int IsCollidable() { return 1; };
-	virtual int IsBlocking() { return 1; }
+	virtual int IsBlockingOnSide(){ return 0; };
+	//virtual int IsBlockingOnTop() { return 1; };
 };
