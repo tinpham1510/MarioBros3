@@ -1,5 +1,9 @@
 #include "Coin.h"
 #include "debug.h"
+CCoin::CCoin(float x, float y) :CGameObject(x, y)
+{
+	firstY = y;
+}
 void CCoin::Render()
 {
 	CAnimations* animations = CAnimations::GetInstance();

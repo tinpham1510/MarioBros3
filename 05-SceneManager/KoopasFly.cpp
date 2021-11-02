@@ -41,11 +41,14 @@ void CKoopasFly::OnCollisionWith(LPCOLLISIONEVENT e)
 	if (dynamic_cast<CKoopasFly*>(e->obj)) return;
 
 
-
-
 	if (e->ny < 0)
 	{
 		vy -= KOOPASFLY_DEFLECT_JUMP_SPEED;
+	}
+
+	if (e->ny != 0)
+	{
+		vy = 0;
 	}
 	else if (e->nx != 0)
 	{

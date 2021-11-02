@@ -18,7 +18,7 @@ class CCoin : public CGameObject {
 public:
 	int firstY;
 	int timeAppear = GetTickCount64();
-	CCoin(float x, float y) : CGameObject(x, y) { firstY = y; }
+	CCoin(float x, float y);
 	void Render();
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void GetBoundingBox(float& l, float& t, float& r, float& b);

@@ -31,4 +31,5 @@ public:
 
 
 	void SetItem(CMushroom* mr);
+	void SetItemC(CCoin* co);
 };

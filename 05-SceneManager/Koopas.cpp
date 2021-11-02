@@ -1,5 +1,6 @@
 #include "Koopas.h"
 #include "Goomba.h"
+#include "GoombaRed.h"
 #include "debug.h"
 #include "Collision.h"
 
@@ -37,23 +38,36 @@ void CKoopas::OnNoCollision(DWORD dt)
 
 void CKoopas::OnCollisionWith(LPCOLLISIONEVENT e)
 {
-	if (!e->obj->IsBlocking()) return;
-	if (dynamic_cast<CKoopas*>(e->obj)) return;
-
-	
-
-	if (e->ny != 0)
+	if (state != KOOPAS_STATE_SHELL_MOVING)
 	{
-		vy = 0;
+		if (!e->obj->IsBlocking()) return;
+		if (dynamic_cast<CKoopas*>(e->obj)) return;
+		if (e->ny != 0)
+		{
+			vy = 0;
+		}
+		else if (e->nx != 0)
+		{
+			vx = -vx;
+
+		}
 	}
-	else if (e->nx != 0)
-	{
-		vx = -vx;
+	else if (state == KOOPAS_STATE_SHELL_MOVING) {
+		if (dynamic_cast<CGoomba*>(e->obj))
+			OnCollisionWithGoomba(e);
+		else if (dynamic_cast<CGoombaRed*>(e->obj))
+			OnCollisionWithRedGoomba(e);
+		if (e->ny != 0)
+		{
+			vy = 0;
+		}
+		else if (e->nx != 0)
+		{
+			vx = -vx;
+
+		}
 		
 	}
-
-	if (dynamic_cast<CGoomba*>(e->obj))
-		OnCollisionWithGoomba(e);
 
 	
 }
@@ -62,12 +76,27 @@ void CKoopas::OnCollisionWithGoomba(LPCOLLISIONEVENT e) {
 	CGoomba* gb = dynamic_cast<CGoomba*>(e->obj);
 	if (state == KOOPAS_STATE_SHELL_MOVING)
 	{
-		DebugOut(L"state: %d\n", state);
 		if (e->nx != 0)
 		{
-			if (gb->GetState() != GOOMBA_STATE_DIE)
+			if (gb->GetState() != GOOMBA_STATE_DIE_BY_ATTACKING)
 			{
-				gb->SetState(GOOMBA_STATE_DIE);
+				gb->SetState(GOOMBA_STATE_DIE_BY_ATTACKING);
+				
+			}
+		}
+	}
+}
+
+void CKoopas::OnCollisionWithRedGoomba(LPCOLLISIONEVENT e) {
+	CGoombaRed* rgb = dynamic_cast<CGoombaRed*>(e->obj);
+	if (state == KOOPAS_STATE_SHELL_MOVING)
+	{
+		if (e->nx != 0)
+		{
+			if (rgb->GetState() != REDGOOMBA_STATE_DIE_T)
+			{
+				rgb->SetState(REDGOOMBA_STATE_DIE_T);
+
 			}
 		}
 	}
@@ -129,8 +158,6 @@ void CKoopas::SetState(int state)
 		break;
 	case KOOPAS_STATE_SHELL_MOVING:
 		vx = KOOPAS_SHELL_SPEED;
-		nx = 1;
-		DebugOut(L"nx: %d\n", Direct);
 		break;
 	}
 }

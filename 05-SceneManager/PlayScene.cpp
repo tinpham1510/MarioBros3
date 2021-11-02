@@ -16,6 +16,7 @@
 #include "Koopas.h"
 #include "Pipe.h"
 #include "KoopasFly.h"
+#include "GoombaRed.h"
 
 
 #include "SampleKeyEventHandler.h"
@@ -142,8 +143,13 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_GOOMBA: obj = new CGoomba(x, y); break;
 	case OBJECT_TYPE_KOOPAS: obj = new CKoopas(x, y); break;
 	case OBJECT_TYPE_KOOPASFLY: obj = new CKoopasFly(x, y); break;
+	case OBJECT_TYPE_REDGOOMBA: obj = new CGoombaRed(x, y); break;
 	case OBJECT_TYPE_BRICK: obj = new CBrick(x, y); break;
-	case OBJECT_TYPE_COIN: obj = new CCoin(x, y); break;
+	case OBJECT_TYPE_COIN: { 
+		obj = new CCoin(x, y); 
+		coin.push_back(dynamic_cast<CCoin*>(obj));
+		break; 
+	}
 
 	case OBJECT_TYPE_MUSHROOM: {
 		obj = new CMushroom(x, y);
@@ -284,8 +290,13 @@ void CPlayScene::Load()
 	{
 		qb[i]->SetItem(mr[i]);
 	}
+	for (size_t i = 0; i < 1; i++)
+	{
+		qb[i]->SetItemC(coin[i]);
+	}
 	qb = vector<CQuestionBrick*>();
 	mr = vector<CMushroom*>();
+	coin = vector<CCoin*>();
 
 	DebugOut(L"[INFO] Done loading scene  %s\n", sceneFilePath);
 }

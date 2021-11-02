@@ -12,6 +12,7 @@
 #include "Mushroom.h"
 #include "Koopas.h"
 #include "KoopasFly.h"
+#include "GoombaRed.h"
 
 #include "Collision.h"
 
@@ -68,6 +69,8 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		OnCollisionWithKoopas(e);
 	else if (dynamic_cast<CKoopasFly*>(e->obj))
 		OnCollisionWithKoopasFly(e);
+	else if (dynamic_cast<CGoombaRed*>(e->obj))
+		OnCollisionWithRedGoomba(e);
 }
 
 void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e )
@@ -129,13 +132,13 @@ void CMario::OnCollisionWithQB(LPCOLLISIONEVENT e) {
 void CMario::OnCollisionWithCoin(LPCOLLISIONEVENT e)
 {
 	CCoin* coins = dynamic_cast<CCoin*>(e->obj);
-	/*if (e->ny > 0)
+	if (e->ny > 0)
 	{
 		coins->SetState(COIN_STATE_APPEAR);
 		
 		coin++;
-	}*/
-	e->obj->Delete();
+	}
+	//e->obj->Delete();
 	
 }
 
@@ -150,6 +153,10 @@ void CMario::OnCollisionWithMushroom(LPCOLLISIONEVENT e) {
 	if (mr->GetState() != MUSHROOM_STATE_COLLISION)
 	{
 		e->obj->Delete();
+		if (level == MARIO_LEVEL_SMALL)
+		{
+			SetLevel(MARIO_LEVEL_BIG);
+		}
 
 	}
 }
@@ -193,8 +200,13 @@ void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e) {
 		if (e->nx != 0)
 		{
 			kp->SetState(KOOPAS_STATE_SHELL_MOVING);
-			kp->setNX(nx);
-			DebugOut(L"nx 2: %d\n", nx);
+			if (vx > 0)
+			{
+				kp->SetSpeed(KOOPAS_SHELL_SPEED * 1, 0);
+			}
+			else
+				kp->SetSpeed(KOOPAS_SHELL_SPEED * -1, 0);
+
 		}
 	}
 
@@ -220,6 +232,44 @@ void CMario::OnCollisionWithKoopasFly(LPCOLLISIONEVENT e) {
 	}
 }
 
+void CMario::OnCollisionWithRedGoomba(LPCOLLISIONEVENT e) {
+	CGoombaRed* rgb = dynamic_cast<CGoombaRed*>(e->obj);
+	if (e->ny < 0)
+	{
+		if (rgb->GetState() != REDGOOMBA_STATE_DIE)
+		{
+			vy = -MARIO_JUMP_DEFLECT_SPEED;
+			if (rgb->GetState() == REDGOOMBA_DEFLECT_SPEED_FLY || rgb->GetState() == REDGOOMBA_STATE_WING_JUMPFLY || rgb->GetState() == REDGOOMBA_STATE_WING_WALKING)
+			{
+				rgb->SetState(REDGOOMBA_STATE_WALKING);
+			}
+			else if (rgb->GetState() == REDGOOMBA_STATE_WALKING)
+			{
+				rgb->SetState(REDGOOMBA_STATE_DIE);
+			}
+			
+		}
+	}
+	else // hit by Goomba
+	{
+		if (untouchable == 0)
+		{
+			if (rgb->GetState() != GOOMBA_STATE_DIE)
+			{
+				if (level > MARIO_LEVEL_SMALL)
+				{
+					level = MARIO_LEVEL_SMALL;
+					StartUntouchable();
+				}
+				else
+				{
+					DebugOut(L">>> Mario DIE >>> \n");
+					SetState(MARIO_STATE_DIE);
+				}
+			}
+		}
+	}
+}
 //
 // Get animation ID for small Mario
 //

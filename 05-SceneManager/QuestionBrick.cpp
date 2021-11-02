@@ -30,7 +30,13 @@ void CQuestionBrick::SetState(int state) {
 			vy = 0;
 			y = First_y;
 			CheckBrickCollision = true;
-			mus->SetState(MUSHROOM_STATE_APPEAR);
+			if (mus != NULL)
+			{
+				mus->SetState(MUSHROOM_STATE_APPEAR);
+			}
+			else if (coin != NULL) {
+				coin->SetState(COIN_STATE_APPEAR);
+			}
 			break;
 
 		}
@@ -62,4 +68,8 @@ void CQuestionBrick::GetBoundingBox(float& l, float& t, float& r, float& b)
 
 void CQuestionBrick::SetItem(CMushroom* mr) {
 	mus = mr;
+}
+
+void CQuestionBrick::SetItemC(CCoin* co) {
+	coin = co;
 }

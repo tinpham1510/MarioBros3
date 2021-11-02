@@ -23,6 +23,7 @@ protected:
 	Map* map;
 	vector<CMushroom*> mr;
 	vector<CQuestionBrick*> qb;
+	vector<CCoin*> coin;
 
 	vector<LPGAMEOBJECT> objects;
 
