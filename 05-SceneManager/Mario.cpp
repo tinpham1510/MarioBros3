@@ -8,6 +8,10 @@
 #include "Coin.h"
 #include "Portal.h"
 #include "ColorBox.h"
+#include "QuestionBrick.h"
+#include "Mushroom.h"
+#include "Koopas.h"
+#include "KoopasFly.h"
 
 #include "Collision.h"
 
@@ -36,18 +40,17 @@ void CMario::OnNoCollision(DWORD dt)
 	y += vy * dt;
 }
 
-void CMario::OnCollisionWith(LPCOLLISIONEVENT e, DWORD dt)
+void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 {
 	if (e->ny != 0 && e->obj->IsBlocking())
 	{
 		vy = 0;
 		if (e->ny < 0) isOnPlatform = true;
 	}
-	else
-		if (e->nx != 0 && e->obj->IsBlocking())
-		{
-			vx = 0;
-		}
+	else if (e->nx != 0 && e->obj->IsBlocking())
+	{
+		vx = 0;
+	}
 
 	if (dynamic_cast<CGoomba*>(e->obj))
 		OnCollisionWithGoomba(e);
@@ -56,10 +59,18 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e, DWORD dt)
 	else if (dynamic_cast<CPortal*>(e->obj))
 		OnCollisionWithPortal(e);
 	else if (dynamic_cast<ColorBox*>(e->obj))
-		OnCollisionWithColorBox(e, dt);
+		OnCollisionWithColorBox(e);
+	else if (dynamic_cast<CQuestionBrick*>(e->obj))
+		OnCollisionWithQB(e);
+	else if (dynamic_cast<CMushroom*>(e->obj))
+		OnCollisionWithMushroom(e);
+	else if (dynamic_cast<CKoopas*>(e->obj))
+		OnCollisionWithKoopas(e);
+	else if (dynamic_cast<CKoopasFly*>(e->obj))
+		OnCollisionWithKoopasFly(e);
 }
 
-void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
+void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e )
 {
 	CGoomba* goomba = dynamic_cast<CGoomba*>(e->obj);
 
@@ -93,12 +104,8 @@ void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e)
 	}
 }
 
-void CMario::OnCollisionWithColorBox(LPCOLLISIONEVENT e, DWORD dt)
+void CMario::OnCollisionWithColorBox(LPCOLLISIONEVENT e)
 {
-	if (e->nx != 0) {
-		e->obj->OnNoCollision(dt);
-	}
-
 	if (e->ny < 0)
 	{
 		vy = 0;
@@ -106,16 +113,111 @@ void CMario::OnCollisionWithColorBox(LPCOLLISIONEVENT e, DWORD dt)
 	}
 }
 
+void CMario::OnCollisionWithQB(LPCOLLISIONEVENT e) {
+	CQuestionBrick* brick = dynamic_cast<CQuestionBrick*>(e->obj);
+	if (e->ny > 0) {
+
+		if (brick->GetState() != QUESTIONBRICK_STATE_EMP)
+		{
+			brick->SetState(QUESTIONBRICK_STATE_COLISION);
+		}
+		
+	}
+}
+
+
 void CMario::OnCollisionWithCoin(LPCOLLISIONEVENT e)
 {
+	CCoin* coins = dynamic_cast<CCoin*>(e->obj);
+	/*if (e->ny > 0)
+	{
+		coins->SetState(COIN_STATE_APPEAR);
+		
+		coin++;
+	}*/
 	e->obj->Delete();
-	coin++;
+	
 }
 
 void CMario::OnCollisionWithPortal(LPCOLLISIONEVENT e)
 {
 	CPortal* p = (CPortal*)e->obj;
 	CGame::GetInstance()->InitiateSwitchScene(p->GetSceneId());
+}
+
+void CMario::OnCollisionWithMushroom(LPCOLLISIONEVENT e) {
+	CMushroom* mr = dynamic_cast<CMushroom*>(e->obj);
+	if (mr->GetState() != MUSHROOM_STATE_COLLISION)
+	{
+		e->obj->Delete();
+
+	}
+}
+void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e) {
+	CKoopas* kp = dynamic_cast<CKoopas*>(e->obj);
+	if (e->ny < 0) {
+		if (kp->GetState() != KOOPAS_STATE_SHELL)
+		{
+			kp->SetState(KOOPAS_STATE_SHELL);
+			vy = -MARIO_JUMP_DEFLECT_SPEED;
+			
+		}
+		else
+		{
+			kp->SetState(KOOPAS_STATE_SHELL_MOVING);
+			vy = -MARIO_JUMP_DEFLECT_SPEED;
+		}
+	}
+	else // hit by 
+	{
+		if (untouchable == 0)
+		{
+			if (kp->GetState() != KOOPAS_STATE_SHELL)
+			{
+				if (level > MARIO_LEVEL_SMALL)
+				{
+					level = MARIO_LEVEL_SMALL;
+					StartUntouchable();
+				}
+				else
+				{
+					DebugOut(L">>> Mario DIE >>> \n");
+					SetState(MARIO_STATE_DIE);
+				}
+			}
+		}
+	}
+	
+	if (kp->GetState() == KOOPAS_STATE_SHELL)
+	{
+		if (e->nx != 0)
+		{
+			kp->SetState(KOOPAS_STATE_SHELL_MOVING);
+			kp->setNX(nx);
+			DebugOut(L"nx 2: %d\n", nx);
+		}
+	}
+
+}
+
+void CMario::OnCollisionWithKoopasFly(LPCOLLISIONEVENT e) {
+	CKoopasFly* kpF = dynamic_cast<CKoopasFly*>(e->obj);
+	if (untouchable == 0)
+	{
+		if (kpF->GetState() != KOOPAS_STATE_SHELL)
+		{
+			if (level > MARIO_LEVEL_SMALL)
+			{
+				level = MARIO_LEVEL_SMALL;
+				StartUntouchable();
+			}
+			else
+			{
+				DebugOut(L">>> Mario DIE >>> \n");
+				SetState(MARIO_STATE_DIE);
+			}
+		}
+	}
 }
 
 //
@@ -255,7 +357,7 @@ void CMario::Render()
 
 	animations->Get(aniId)->Render(x, y);
 
-	//RenderBoundingBox();
+	RenderBoundingBox();
 
 	DebugOutTitle(L"Coins: %d", coin);
 }
