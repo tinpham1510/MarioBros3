@@ -18,7 +18,6 @@ class Map
 	int rows;
 	int TileSetWidth;
 	int TileSetHeight;
-
 	int TileMapID[MAX][MAX];
 
 public:

@@ -1,5 +1,6 @@
 #include "Mushroom.h"
 #include "Platform.h"
+#include "Pipe.h"
 CMushroom::CMushroom(float x, float y) : CGameObject(x, y)
 {
 	firstY = y;
