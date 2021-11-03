@@ -25,7 +25,9 @@ protected:
 	float ay;
 	int Direct;
 	bool isCollision;
+	int TimeCollision;
 	ULONGLONG die_start;
+	ULONGLONG shell_start;
 	float objX;
 	float objY;
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
@@ -33,6 +35,7 @@ protected:
 	virtual void Render();
 	void OnCollisionWithGoomba(LPCOLLISIONEVENT e);
 	void OnCollisionWithRedGoomba(LPCOLLISIONEVENT e);
+	void OnCollisionWithQB(LPCOLLISIONEVENT e);
 	virtual int IsCollidable() { return 1; };
 
 	virtual int IsBlocking() { return 0; }

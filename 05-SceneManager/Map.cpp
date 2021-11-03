@@ -16,7 +16,7 @@ Map::Map(int ID, LPCWSTR Filepath, int Rows, int Cols, int Tiles, int TileColumn
 	//DrawMap();
 }
 void Map::Load() {
-	std::ifstream f;
+	ifstream f;
 	f.open(FilepathMap);
 	for (int i = 0; i < rows; i++)
 	{

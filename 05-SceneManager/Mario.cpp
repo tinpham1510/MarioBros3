@@ -31,6 +31,10 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		untouchable = 0;
 	}
 
+	if (state == MARIO_STATE_KICK && GetTickCount64() - timeKick > 5000) {
+		isKicking = false;
+		
+	}
 	isOnPlatform = false;
 
 	CCollision::GetInstance()->Process(this, dt, coObjects);
@@ -81,7 +85,7 @@ void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e )
 	// jump on top >> kill Goomba and deflect a bit 
 	if (e->ny < 0)
 	{
-		if (goomba->GetState() != GOOMBA_STATE_DIE)
+		if (goomba->GetState() != GOOMBA_STATE_DIE && goomba->GetState()!= GOOMBA_STATE_DIE_BY_ATTACKING)
 		{
 			goomba->SetState(GOOMBA_STATE_DIE);
 			vy = -MARIO_JUMP_DEFLECT_SPEED;
@@ -316,6 +320,7 @@ int CMario::GetAniIdSmall()
 					aniId = ID_ANI_MARIO_SMALL_RUNNING_RIGHT;
 				else if (ax == MARIO_ACCEL_WALK_X)
 					aniId = ID_ANI_MARIO_SMALL_WALKING_RIGHT;
+
 			}
 			else // vx < 0
 			{
@@ -378,6 +383,8 @@ int CMario::GetAniIdBig()
 					aniId = ID_ANI_MARIO_RUNNING_RIGHT;
 				else if (ax == MARIO_ACCEL_WALK_X)
 					aniId = ID_ANI_MARIO_WALKING_RIGHT;
+				else if (isKicking == true)
+					aniId = ID_ANI_MARIO_KICK_RIGHT;
 			}
 			else // vx < 0
 			{
@@ -387,6 +394,8 @@ int CMario::GetAniIdBig()
 					aniId = ID_ANI_MARIO_RUNNING_LEFT;
 				else if (ax == -MARIO_ACCEL_WALK_X)
 					aniId = ID_ANI_MARIO_WALKING_LEFT;
+				else if (isKicking == true)
+					aniId = ID_ANI_MARIO_KICK_LEFT;
 			}
 
 	if (aniId == -1) aniId = ID_ANI_MARIO_IDLE_RIGHT;
@@ -488,6 +497,11 @@ void CMario::SetState(int state)
 		vy = -MARIO_JUMP_DEFLECT_SPEED;
 		vx = 0;
 		ax = 0;
+		break;
+	case MARIO_STATE_KICK:
+		isKicking = true;
+		timeKick = GetTickCount64();
+		DebugOut(L"HAHA");
 		break;
 	}
 
