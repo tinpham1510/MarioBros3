@@ -18,8 +18,8 @@ void CCoin::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 	y += vy * dt;
 	if (state == COIN_STATE_APPEAR)
 	{
-		if (y < firstY - 35) {
-			vy = 0.1;
+		if (y < firstY - MAX_Y) {
+			vy = COIN_BOUNCING;
 			
 			if (GetTickCount64() - timeAppear >= TIME_COIN_APPEAR)
 			{

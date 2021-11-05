@@ -150,8 +150,7 @@ void CGoombaRed::SetState(int state)
 		timeWalking = GetTickCount64();
 		break;
 	case REDGOOMBA_STATE_WING_JUMPFLY:
-		timeJump = GetTickCount64();
-		
+		timeJump = GetTickCount64();	
 		break;
 	case REDGOOMBA_STATE_WING_FLY:
 		timeFly = GetTickCount64();

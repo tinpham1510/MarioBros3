@@ -19,7 +19,7 @@ goombaRed.txt
 # See OBJECT_TYPE constants in AssetIDs.h
 
 # MARIO
-0	200	10
+0	20	10
 
 #COIN
 4	224	288
@@ -92,7 +92,7 @@ goombaRed.txt
 #Goomba
 2	400	368
 #RED GOOM
-9	300	368
+9	530	368
 
 # PIPE
 300	352	352	16	48	2
