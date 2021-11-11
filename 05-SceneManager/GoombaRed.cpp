@@ -1,5 +1,6 @@
 #include "GoombaRed.h"
 #include "Koopas.h"
+#include "Mario.h"
 CGoombaRed::CGoombaRed(float x, float y) :CGameObject(x, y)
 {
 	this->ax = 0;
@@ -62,6 +63,11 @@ void CGoombaRed::OnCollisionWith(LPCOLLISIONEVENT e)
 	{
 		vx = -vx;
 	}
+	else if (dynamic_cast<CMario*>(e->obj)) {
+			if (e->ny > 0) {
+				SetState(REDGOOMBA_STATE_WALKING);
+			}
+	}
 
 	if (state == REDGOOMBA_STATE_WING_JUMPFLY)
 	{
@@ -75,8 +81,6 @@ void CGoombaRed::OnCollisionWith(LPCOLLISIONEVENT e)
 			vy -= REDGOOMBA_DEFLECT_SPEED_FLY;
 		}
 	}
-
-
 }
 
 void CGoombaRed::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)

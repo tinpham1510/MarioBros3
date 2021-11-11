@@ -1,6 +1,6 @@
 #include "Collision.h"
 #include "GameObject.h"
-
+#include "AssetIDs.h"
 #include "debug.h"
 
 #define BLOCK_PUSH_FACTOR 0.4f
@@ -356,7 +356,7 @@ void CCollision::Process(LPGAMEOBJECT objSrc, DWORD dt, vector<LPGAMEOBJECT>* co
 		LPCOLLISIONEVENT e = coEvents[i];
 		if (e->isDeleted) continue;
 		if (e->obj->IsBlocking()) continue;  // blocking collisions were handled already, skip them
-
+		
 		objSrc->OnCollisionWith(e);			
 	}
 

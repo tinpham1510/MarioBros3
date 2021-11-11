@@ -204,33 +204,49 @@ void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e) {
 		if (e->nx != 0)
 		{
 			kp->SetState(KOOPAS_STATE_SHELL_MOVING);
-			if (vx > 0)
+			if (vx != 0)
 			{
-				kp->SetSpeed(KOOPAS_SHELL_SPEED * 1, 0);
+				kp->SetSpeed(KOOPAS_SHELL_SPEED * nx, 0);
 			}
-			else
-				kp->SetSpeed(KOOPAS_SHELL_SPEED * -1, 0);
+			
 
 		}
 	}
+
 
 }
 
 void CMario::OnCollisionWithKoopasFly(LPCOLLISIONEVENT e) {
 	CKoopasFly* kpF = dynamic_cast<CKoopasFly*>(e->obj);
-	if (untouchable == 0)
-	{
-		if (kpF->GetState() != KOOPAS_STATE_SHELL)
+	if (e->ny < 0) {
+		if (kpF->GetState() != KOOPASFLY_STATE_SHELL)
 		{
-			if (level > MARIO_LEVEL_SMALL)
+			kpF->SetState(KOOPASFLY_STATE_SHELL);
+			vy = -MARIO_JUMP_DEFLECT_SPEED;
+
+		}
+		else
+		{
+			kpF->SetState(KOOPAS_STATE_SHELL_MOVING);
+			vy = -MARIO_JUMP_DEFLECT_SPEED;
+		}
+	}
+	else // hit by 
+	{
+		if (untouchable == 0)
+		{
+			if (kpF->GetState() != KOOPASFLY_STATE_SHELL)
 			{
-				level = MARIO_LEVEL_SMALL;
-				StartUntouchable();
-			}
-			else
-			{
-				DebugOut(L">>> Mario DIE >>> \n");
-				SetState(MARIO_STATE_DIE);
+				if (level > MARIO_LEVEL_SMALL)
+				{
+					level = MARIO_LEVEL_SMALL;
+					StartUntouchable();
+				}
+				else
+				{
+					DebugOut(L">>> Mario DIE >>> \n");
+					SetState(MARIO_STATE_DIE);
+				}
 			}
 		}
 	}
