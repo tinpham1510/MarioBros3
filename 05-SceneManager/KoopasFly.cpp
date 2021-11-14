@@ -50,7 +50,7 @@ void CKoopasFly::OnCollisionWith(LPCOLLISIONEVENT e)
 		vx = -vx;
 
 	}
-	//
+	
 	/*if (state == KOOPASFLY_STATE_JUMPFLY)
 	{
 		if (e->ny < 0) {
@@ -84,7 +84,6 @@ void CKoopasFly::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	vy += ay * dt;
 	vx += ax * dt;
-	
 	
 
 	if ((state == KOOPASFLY_STATE_SHELL) && GetTickCount64() - die_start > KOOPAS_DIE_TIMEOUT)

@@ -198,7 +198,7 @@ void CGame::Draw(float x, float y, LPTEXTURE tex, RECT* rect, float alpha, int s
 		sprite.TexCoord.y = rect->top / (float)tex->getHeight();
 
 		if (spriteWidth == 0) spriteWidth = (rect->right - rect->left );
-		if (spriteHeight == 0) spriteHeight = (rect->bottom - rect->top);
+		if (spriteHeight == 0) spriteHeight = (rect->bottom - rect->top );
 
 		sprite.TexSize.x = spriteWidth / (float)tex->getWidth();
 		sprite.TexSize.y = spriteHeight / (float)tex->getHeight();
