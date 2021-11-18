@@ -8,10 +8,7 @@
 class KoopasObject : public CGameObject
 {
 public:
-	
-	float ax;
-	float ay;
-	KoopasObject(float x, float y) :CGameObject(x, y) {  }
+	KoopasObject(float x, float y);
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	virtual void Render();

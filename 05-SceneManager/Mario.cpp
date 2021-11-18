@@ -219,36 +219,83 @@ void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e) {
 
 void CMario::OnCollisionWithKoopasFly(LPCOLLISIONEVENT e) {
 	CKoopasFly* kpF = dynamic_cast<CKoopasFly*>(e->obj);
-	if (e->ny < 0) {
-		if (kpF->GetState() != KOOPASFLY_STATE_SHELL)
-		{
-			kpF->SetState(KOOPASFLY_STATE_SHELL);
-			vy = -MARIO_JUMP_DEFLECT_SPEED;
-
-		}
-		else
-		{
-			kpF->SetState(KOOPAS_STATE_SHELL_MOVING);
-			vy = -MARIO_JUMP_DEFLECT_SPEED;
-		}
-	}
-	else // hit by 
+	if (kpF->GetState() == KOOPASFLY_STATE_JUMPFLY)
 	{
-		if (untouchable == 0)
-		{
+		if (e->ny < 0) {
 			if (kpF->GetState() != KOOPASFLY_STATE_SHELL)
 			{
-				if (level > MARIO_LEVEL_SMALL)
+				kpF->SetState(KOOPASFLY_STATE_WALKING);
+				vy = -MARIO_JUMP_DEFLECT_SPEED;
+
+			}
+		}
+		else // hit by 
+		{
+			if (untouchable == 0)
+			{
+				if (kpF->GetState() != KOOPASFLY_STATE_SHELL)
 				{
-					level = MARIO_LEVEL_SMALL;
-					StartUntouchable();
-				}
-				else
-				{
-					DebugOut(L">>> Mario DIE >>> \n");
-					SetState(MARIO_STATE_DIE);
+					if (level > MARIO_LEVEL_SMALL)
+					{
+						level = MARIO_LEVEL_SMALL;
+						StartUntouchable();
+					}
+					else
+					{
+						DebugOut(L">>> Mario DIE >>> \n");
+						SetState(MARIO_STATE_DIE);
+					}
 				}
 			}
+		}
+	}
+	else if (kpF->GetState() == KOOPASFLY_STATE_WALKING)
+	{
+		if (e->ny < 0) {
+			if (kpF->GetState() != KOOPASFLY_STATE_SHELL)
+			{
+				kpF->SetState(KOOPASFLY_STATE_SHELL);
+				vy = -MARIO_JUMP_DEFLECT_SPEED;
+
+			}
+			else
+			{
+				kpF->SetState(KOOPASFLY_STATE_SHELL_MOVING);
+				vy = -MARIO_JUMP_DEFLECT_SPEED;
+			}
+		}
+		else // hit by 
+		{
+			if (untouchable == 0)
+			{
+				if (kpF->GetState() != KOOPASFLY_STATE_SHELL)
+				{
+					if (level > MARIO_LEVEL_SMALL)
+					{
+						level = MARIO_LEVEL_SMALL;
+						StartUntouchable();
+					}
+					else
+					{
+						DebugOut(L">>> Mario DIE >>> \n");
+						SetState(MARIO_STATE_DIE);
+					}
+				}
+			}
+		}
+	}
+
+	if (kpF->GetState() == KOOPASFLY_STATE_SHELL)
+	{
+		if (e->nx != 0)
+		{
+			kpF->SetState(KOOPASFLY_STATE_SHELL_MOVING);
+			if (vx != 0)
+			{
+				kpF->SetSpeed(KOOPASFLY_SHELL_SPEED * nx, 0);
+			}
+
+
 		}
 	}
 }

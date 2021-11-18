@@ -337,6 +337,13 @@ void CPlayScene::Update(DWORD dt)
 
 	if (cx < 0) cx = 0;
 	if (cy < 0) cy = 0;
+	if (cx > map->GetMapWidth() - game->GetBackBufferWidth() - ScreenH) {
+		cx = float(map->GetMapWidth() - game->GetBackBufferWidth()- ScreenH);
+	}
+	if (cy > map->GetMapHeight() - game->GetBackBufferHeight())
+	{
+		cy = float(map->GetMapHeight() - game->GetBackBufferHeight());
+	}
 
 	CGame::GetInstance()->SetCamPos(cx, cy - ScreenH);
 
@@ -345,7 +352,7 @@ void CPlayScene::Update(DWORD dt)
 
 void CPlayScene::Render()
 {
-	//map->DrawMap();
+	map->DrawMap();
 	for (int i = 0; i < objects.size(); i++)
 		objects[i]->Render();
 }
