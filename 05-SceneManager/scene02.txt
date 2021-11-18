@@ -10,6 +10,7 @@ goomba.txt
 koopas.txt
 koopasFly.txt
 goombaRed.txt
+warpipe.txt
 #
 [MAP]
 30	map1.txt	27	176	11	11	0
@@ -103,6 +104,8 @@ goombaRed.txt
 300	2256	96	16	192	2
 300	2320	368	16	32	2
 
+#Warpipe
+10	360	330
 #QuestionBrick
 200	176	336
 200	192	336

@@ -1,0 +1,11 @@
+# id	left	top	right	bottom	texture_id
+[SPRITES]
+# Warpipe Left
+81001	32	144	48	176	18
+81002	13	144	29	176	18
+# Warpipe Right
+82001	133	144	149	176	18
+82002	153	144	169	176	18
+# ani_id	sprite1_id	time1	sprite2_id	time2	...
+[ANIMATIONS]
+10000	81001	1000	81002	1000

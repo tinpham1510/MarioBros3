@@ -172,6 +172,7 @@
     <ClCompile Include="Sprites.cpp" />
     <ClCompile Include="Textures.cpp" />
     <ClCompile Include="Utils.cpp" />
+    <ClCompile Include="Warpipe.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
@@ -207,6 +208,10 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Textures.h" />
     <ClInclude Include="Utils.h" />
+    <ClInclude Include="Warpipe.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="warpipe.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

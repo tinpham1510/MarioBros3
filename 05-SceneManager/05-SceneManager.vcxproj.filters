@@ -105,6 +105,9 @@
     <ClCompile Include="KoopasObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Warpipe.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h">
@@ -206,5 +209,11 @@
     <ClInclude Include="KoopasObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Warpipe.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="warpipe.txt" />
   </ItemGroup>
 </Project>

@@ -17,6 +17,7 @@
 #include "Pipe.h"
 #include "KoopasFly.h"
 #include "GoombaRed.h"
+#include "Warpipe.h"
 
 
 #include "SampleKeyEventHandler.h"
@@ -148,6 +149,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_KOOPASFLY: obj = new CKoopasFly(x, y); break;
 	case OBJECT_TYPE_REDGOOMBA: obj = new CGoombaRed(x, y); break;
 	case OBJECT_TYPE_BRICK: obj = new CBrick(x, y); break;
+	case OBJECT_TYPE_WARPIPE: obj = new CWarpipe(x, y); break;
 	case OBJECT_TYPE_COIN: { 
 		obj = new CCoin(x, y); 
 		coin.push_back(dynamic_cast<CCoin*>(obj));
@@ -355,6 +357,7 @@ void CPlayScene::Render()
 	map->DrawMap();
 	for (int i = 0; i < objects.size(); i++)
 		objects[i]->Render();
+	
 }
 
 /*
