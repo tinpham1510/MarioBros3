@@ -149,7 +149,7 @@ void CKoopasFly::SetState(int state)
 		vx = -KOOPASFLY_WALKING_SPEED;
 		break;
 	case KOOPASFLY_STATE_SHELL_MOVING:
-		//vx = KOOPASFLY_SHELL_SPEED;
+		vx = KOOPASFLY_SHELL_SPEED;
 		break;
 
 	}

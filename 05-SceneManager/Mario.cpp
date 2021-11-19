@@ -30,11 +30,6 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		untouchable_start = 0;
 		untouchable = 0;
 	}
-
-	if (state == MARIO_STATE_KICK && GetTickCount64() - timeKick > 5000) {
-		isKicking = false;
-		
-	}
 	isOnPlatform = false;
 
 	CCollision::GetInstance()->Process(this, dt, coObjects);
@@ -165,6 +160,7 @@ void CMario::OnCollisionWithMushroom(LPCOLLISIONEVENT e) {
 
 	}
 }
+
 void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e) {
 	CKoopas* kp = dynamic_cast<CKoopas*>(e->obj);
 	if (e->ny < 0) {
@@ -219,76 +215,53 @@ void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e) {
 
 void CMario::OnCollisionWithKoopasFly(LPCOLLISIONEVENT e) {
 	CKoopasFly* kpF = dynamic_cast<CKoopasFly*>(e->obj);
-	if (kpF->GetState() == KOOPASFLY_STATE_JUMPFLY)
-	{
-		if (e->ny < 0) {
+	if (e->ny < 0) {
+		if (kpF->GetState() == KOOPASFLY_STATE_JUMPFLY)
+		{
 			if (kpF->GetState() != KOOPASFLY_STATE_SHELL)
 			{
 				kpF->SetState(KOOPASFLY_STATE_WALKING);
 				vy = -MARIO_JUMP_DEFLECT_SPEED;
-
 			}
 		}
-		else // hit by 
+		else if (kpF->GetState() == KOOPASFLY_STATE_WALKING)
 		{
-			if (untouchable == 0)
-			{
-				if (kpF->GetState() != KOOPASFLY_STATE_SHELL)
-				{
-					if (level > MARIO_LEVEL_SMALL)
-					{
-						level = MARIO_LEVEL_SMALL;
-						StartUntouchable();
-					}
-					else
-					{
-						DebugOut(L">>> Mario DIE >>> \n");
-						SetState(MARIO_STATE_DIE);
-					}
-				}
-			}
-		}
-	}
-	else if (kpF->GetState() == KOOPASFLY_STATE_WALKING)
-	{
-		if (e->ny < 0) {
 			if (kpF->GetState() != KOOPASFLY_STATE_SHELL)
 			{
 				kpF->SetState(KOOPASFLY_STATE_SHELL);
 				vy = -MARIO_JUMP_DEFLECT_SPEED;
 
 			}
-			else
-			{
-				kpF->SetState(KOOPASFLY_STATE_SHELL_MOVING);
-				vy = -MARIO_JUMP_DEFLECT_SPEED;
-			}
 		}
-		else // hit by 
+		else {
+			kpF->SetState(KOOPASFLY_STATE_SHELL_MOVING);
+			kpF->SetSpeed(KOOPASFLY_SHELL_SPEED * nx, 0);
+			vy = -MARIO_JUMP_DEFLECT_SPEED;
+		}
+	}
+	else
+	{
+		if (untouchable == 0)
 		{
-			if (untouchable == 0)
+			if (kpF->GetState() != KOOPASFLY_STATE_SHELL)
 			{
-				if (kpF->GetState() != KOOPASFLY_STATE_SHELL)
+				if (level > MARIO_LEVEL_SMALL)
 				{
-					if (level > MARIO_LEVEL_SMALL)
-					{
-						level = MARIO_LEVEL_SMALL;
-						StartUntouchable();
-					}
-					else
-					{
-						DebugOut(L">>> Mario DIE >>> \n");
-						SetState(MARIO_STATE_DIE);
-					}
+					level = MARIO_LEVEL_SMALL;
+					StartUntouchable();
+				}
+				else
+				{
+					DebugOut(L">>> Mario DIE >>> \n");
+					SetState(MARIO_STATE_DIE);
 				}
 			}
 		}
 	}
 
-	if (kpF->GetState() == KOOPASFLY_STATE_SHELL)
+	if (e->nx != 0)
 	{
-		if (e->nx != 0)
-		{
+		if(kpF->GetState() == KOOPASFLY_STATE_SHELL){
 			kpF->SetState(KOOPASFLY_STATE_SHELL_MOVING);
 			if (vx != 0)
 			{
