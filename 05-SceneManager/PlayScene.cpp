@@ -19,7 +19,6 @@
 #include "GoombaRed.h"
 #include "Warpipe.h"
 
-
 #include "SampleKeyEventHandler.h"
 
 using namespace std;
@@ -201,8 +200,12 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		float cell_width = (float)atof(tokens[3].c_str());
 		float cell_height = (float)atof(tokens[4].c_str());
 		int length = atoi(tokens[5].c_str());
+		int sprite_id_1 = atoi(tokens[6].c_str());
+		int sprite_id_2 = atoi(tokens[7].c_str());
+		int sprite_id_3 = atoi(tokens[8].c_str());
+		int sprite_id_4 = atoi(tokens[9].c_str());
 		obj = new CPipe(x, y, cell_width * length, cell_height,
-			cell_width, cell_height, length);
+			cell_width, cell_height, length, sprite_id_1, sprite_id_2, sprite_id_3, sprite_id_4);
 		break;
 	}
 	case OBJECT_TYPE_PORTAL:

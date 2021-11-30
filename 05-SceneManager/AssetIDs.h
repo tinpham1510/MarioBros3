@@ -10,6 +10,7 @@
 #define ID_TEX_MISC 20
 #define ID_TEX_MAP 30
 #define ID_TEX_MISC 40
+#define ID_TEX_PIPE	50
 
 
 

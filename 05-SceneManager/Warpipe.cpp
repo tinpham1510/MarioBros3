@@ -69,11 +69,11 @@ void CWarpipe::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 void CWarpipe::Render()
 {
-	int aniId = ID_ANI_WARPIPE_LEFT;
-	
 
-	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
-	RenderBoundingBox();
+
+		int aniId = ID_ANI_WARPIPE_LEFT;
+		CAnimations::GetInstance()->Get(aniId)->Render(x, y);
+		RenderBoundingBox();
 }
 
 void CWarpipe::SetState(int state)

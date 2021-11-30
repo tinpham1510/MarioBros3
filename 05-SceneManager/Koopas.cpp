@@ -1,6 +1,7 @@
 #include "Koopas.h"
 #include "Goomba.h"
 #include "GoombaRed.h"
+#include "Mushroom.h"
 #include "debug.h"
 #include "Collision.h"
 #include "QuestionBrick.h"
@@ -156,15 +157,11 @@ void CKoopas::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	{
 		if (GetTickCount64() - shell_start > KOOPAS_DIE_TIMEOUT)
 		{
-			if (vx > 0)
-			{
-				SetState(KOOPAS_WALKING_SPEED);
-			}
-			else
+			SetState(KOOPAS_STATE_WALKING);
 
 			ReturnLife();
 		}
-		else if (GetTickCount64() - TimeCollision > 100)
+		else if (GetTickCount64() - TimeCollision > KOOPAS_TIME_COLLISION)
 		{
 			isCollision = false;
 		}

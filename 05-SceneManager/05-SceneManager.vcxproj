@@ -211,6 +211,7 @@
     <ClInclude Include="Warpipe.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="pipe.txt" />
     <Text Include="warpipe.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
