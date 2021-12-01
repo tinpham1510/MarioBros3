@@ -110,8 +110,9 @@ class CMario : public CGameObject
 	BOOLEAN isSitting;
 	float maxVx;
 	float ax;				// acceleration on x 
-	float ay;				// acceleration on y 
-	
+	float ay;		// acceleration on y 
+	static CMario* __instance;
+
 	int level; 
 	int untouchable; 
 	bool isKicking;
@@ -134,6 +135,8 @@ class CMario : public CGameObject
 
 public:
 	BOOLEAN isOnPlatform;
+	static CMario* GetInstance();
+	static void SetInstance(CMario* p);
 	CMario(float x, float y) : CGameObject(x, y)
 	{
 		isSitting = false;
@@ -159,7 +162,8 @@ public:
 	}
 
 	int IsBlocking() { return (state != MARIO_STATE_DIE && untouchable==0); }
-
+	float GetPositionX() { return x; };
+	float GetPositionY() { return y; };
 	void OnNoCollision(DWORD dt);
 	void OnCollisionWith(LPCOLLISIONEVENT e);
 
@@ -167,4 +171,5 @@ public:
 	void StartUntouchable() { untouchable = 1; untouchable_start = GetTickCount64(); }
 
 	void GetBoundingBox(float& left, float& top, float& right, float& bottom);
+	
 };

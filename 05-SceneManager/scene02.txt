@@ -10,7 +10,7 @@ goomba.txt
 koopas.txt
 koopasFly.txt
 goombaRed.txt
-warpipe.txt
+fireplant.txt
 pipe.txt
 #
 [MAP]
