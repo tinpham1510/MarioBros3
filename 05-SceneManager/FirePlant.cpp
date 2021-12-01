@@ -69,7 +69,7 @@ void CFirePlant::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	}
 
 
-	DebugOut(L"state: %d\n", state);
+	//DebugOut(L"state: %d\n", state);
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
