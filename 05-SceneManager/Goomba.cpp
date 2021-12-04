@@ -61,7 +61,7 @@ void CGoomba::Update(DWORD dt, vector<LPGAMEOBJECT> *coObjects)
 
 	if (state == GOOMBA_STATE_DIE_BY_ATTACKING)
 	{
-		vy = -GOOMBA_GRAVITY * dt;
+		vy = -GOOMBA_DEFLECT_SPEED_Y;
 	}
 
 	if ( (state==GOOMBA_STATE_DIE) && (GetTickCount64() - die_start > GOOMBA_DIE_TIMEOUT) )
