@@ -143,7 +143,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		CMario::SetInstance((CMario*)obj);
 
 		tail = new CTail(x, y);
-		//objects.push_back(tail);
+		objects.push_back(tail);
 		CMario* ma = dynamic_cast<CMario*>(obj);
 		ma->tail = tail;
 		DebugOut(L"[INFO] Player object has been created!\n");
@@ -328,7 +328,10 @@ void CPlayScene::Update(DWORD dt)
 	vector<LPGAMEOBJECT> coObjects;
 	for (size_t i = 1; i < objects.size(); i++)
 	{
-		coObjects.push_back(objects[i]);
+		if (i >= 2)
+		{
+			coObjects.push_back(objects[i]);
+		}
 	}
 
 	for (size_t i = 0; i < objects.size(); i++)
