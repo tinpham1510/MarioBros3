@@ -52,7 +52,7 @@ void CKoopas::OnCollisionWith(LPCOLLISIONEVENT e)
 		{
 			vy = 0;
 		}
-		else if (e->nx != 0)
+		else if (e->nx != 0 && e->obj->IsBlocking())
 		{
 			vx = -vx;
 		}
@@ -132,7 +132,7 @@ void CKoopas::OnCollisionWithQB(LPCOLLISIONEVENT e) {
 
 void CKoopas::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	DebugOut(L"state: %d \n", state);
+	//DebugOut(L"state: %d \n", state);
 	vy += ay * dt;
 	vx += ax * dt;
 	if (state == KOOPAS_STATE_WALKING)
@@ -182,6 +182,13 @@ void CKoopas::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		ReturnLife();
 	}
 	CGameObject::Update(dt, coObjects);
+	for (int i = 0; i < coObjects->size(); i++)
+	{
+		if (dynamic_cast<CMario*>(coObjects->at(i)))
+		{
+			DebugOut(L"Hello\n");
+		}
+	}
 	
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
@@ -229,7 +236,6 @@ void CKoopas::SetState(int state)
 	switch (state)
 	{
 	case KOOPAS_STATE_SHELL:
-		y += (KOOPAS_BBOX_HEIGHT - KOOPAS_BBOX_HEIGHT_SHELL) / 2;
 		die_start = GetTickCount64();
 		vx = 0;
 		break;

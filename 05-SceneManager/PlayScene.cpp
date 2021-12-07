@@ -143,7 +143,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		CMario::SetInstance((CMario*)obj);
 
 		tail = new CTail(x, y);
-		objects.push_back(tail);
+		//objects.push_back(tail);
 		CMario* ma = dynamic_cast<CMario*>(obj);
 		ma->tail = tail;
 		DebugOut(L"[INFO] Player object has been created!\n");

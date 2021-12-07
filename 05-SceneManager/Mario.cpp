@@ -61,13 +61,13 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			SetState(MARIO_STATE_RELEASE_JUMP);
 		}
 	}
-	DebugOut(L"state: %d\n", state);
-	if (isFlying == true)
-	{
-		DebugOut(L"true\n");
-	}
-	else
-		DebugOut(L"false\n");
+	//DebugOut(L"state: %d\n", state);
+	//if (isFlying == true)
+	//{
+	//	DebugOut(L"true\n");
+	//}
+	//else
+	//	DebugOut(L"false\n");
 	if (powerStack == MARIO_MAX_POWER)
 	{
 		//SetState(MARIO_STATE_FLYING);
@@ -273,6 +273,11 @@ void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e) {
 		{
 			kp->SetState(KOOPAS_STATE_SHELL_MOVING);
 			vy = -MARIO_JUMP_DEFLECT_SPEED;
+		}
+
+		if (kp->GetState() == KOOPAS_STATE_SHELL_MOVING)
+		{
+			kp->SetSpeed(0, 0);
 		}
 	}
 	else // hit by 
