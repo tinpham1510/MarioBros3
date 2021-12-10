@@ -4,7 +4,7 @@ void Pbutton::Render()
 {
 	CAnimations* animations = CAnimations::GetInstance();
 
-	if (state != PBUTTON_STATE_APPEAR)
+	if (state == PBUTTON_STATE_NORMAL)
 	{
 		animations->Get(ID_ANI_PBUTTON_NORMAL)->Render(x, y);
 	}
@@ -56,6 +56,7 @@ void Pbutton::SetState(int state)
 		vy -= 0.2f;
 		break;
 	case PBUTTON_STATE_COLLISION:
+		y += (PBUTTON_BBOX_HEIGHT_BIG - PBUTTON_BBOX_HEIGHT_SMALL) / 2;
 		break;
 	default:
 		break;

@@ -16,6 +16,7 @@
 #include "Pipe.h"
 #include "FirePlant.h"
 #include "Brick.h"
+#include "Pbutton.h"
 
 
 #include "Collision.h"
@@ -182,7 +183,22 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		OnCollisionWithPlant(e);
 	else if (dynamic_cast<CBrick*>(e->obj))
 		OnCollisionWithB(e);
+	else if (dynamic_cast<Pbutton*>(e->obj))
+		OnCollisionWithPbutton(e);
 }
+
+void CMario::OnCollisionWithPbutton(LPCOLLISIONEVENT e)
+{
+	Pbutton* pb = dynamic_cast<Pbutton*>(e->obj);
+	if (e->ny < 0)
+	{
+		if (pb->GetState() != PBUTTON_STATE_COLLISION)
+		{
+			pb->SetState(PBUTTON_STATE_COLLISION);
+		}
+	}
+}
+
 
 void CMario::OnCollisionWithB(LPCOLLISIONEVENT e)
 {
