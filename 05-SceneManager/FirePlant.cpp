@@ -1,11 +1,12 @@
 #include "FirePlant.h"
 #include "Mario.h"
 #include "debug.h"
-CFirePlant::CFirePlant(float x, float y) :CGameObject(x, y)
+CFirePlant::CFirePlant(float x, float y, int typeF) :CGameObject(x, y)
 {
 	first_y = y;
 	second_y = y;
 	SetState(FirePlant_STATE_APPEAR);
+	typePlant = typeF;
 }
 
 void CFirePlant::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -31,7 +32,6 @@ void CFirePlant::OnCollisionWith(LPCOLLISIONEVENT e)
 void CFirePlant::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	y += vy * dt;
-
 	Mario_x = CMario::GetInstance()->GetPositionX();
 	Mario_y = CMario::GetInstance()->GetPositionY();
 	if (Mario_x >= this->x) {
@@ -40,16 +40,35 @@ void CFirePlant::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	else {
 		nx = -1;
 	}
-	if (state == FirePlant_STATE_APPEAR)
+
+	if (typePlant == 0)
 	{
-		if (y > first_y + FirePlant_HEIGHT_OFFSET) {
-			SetState(FirePlant_STATE_STOP_ONPIPE);
+		if (state == FirePlant_STATE_APPEAR)
+		{
+			if (y > first_y + FirePlant_HEIGHT_OFFSET) {
+				SetState(FirePlant_STATE_STOP_ONPIPE);
+			}
+		}
+		else if (state == FirePlant_STATE_INPIPE)
+		{
+			if (y < first_y) {
+				SetState(FirePlant_STATE_STOP_INPIPE);
+			}
 		}
 	}
-	else if (state == FirePlant_STATE_INPIPE )
+	else
 	{
-		if (y < first_y  ) {
-			SetState(FirePlant_STATE_STOP_INPIPE);
+		if (state == FirePlant_STATE_APPEAR)
+		{
+			if (y > first_y + Fire_GreenPlant_HEIGHT_OFFSET) {
+				SetState(FirePlant_STATE_STOP_ONPIPE);
+			}
+		}
+		else if (state == FirePlant_STATE_INPIPE)
+		{
+			if (y < first_y) {
+				SetState(FirePlant_STATE_STOP_INPIPE);
+			}
 		}
 	}
 
@@ -67,8 +86,6 @@ void CFirePlant::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			SetState(FirePlant_STATE_APPEAR);
 		}
 	}
-
-
 	//DebugOut(L"state: %d\n", state);
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
@@ -78,22 +95,45 @@ void CFirePlant::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 void CFirePlant::Render()
 {
 	int aniId = -1;
-	if (nx > 0)
+	if (typePlant == 0)
 	{
-		if (Mario_y < y) {
-			aniId = ID_ANI_FirePlant_UP_RIGHT;
-		}
-		else 
-			aniId = ID_ANI_FirePlant_RIGHT;
-	}
-	else
-	{
-		if (Mario_y < y)
+		if (nx > 0)
 		{
-			aniId = ID_ANI_FirePlant_UP_LEFT;
+			if (Mario_y < y) {
+				aniId = ID_ANI_FirePlant_UP_RIGHT;
+			}
+			else
+				aniId = ID_ANI_FirePlant_RIGHT;
 		}
 		else
-			aniId = ID_ANI_FirePlant_LEFT;
+		{
+			if (Mario_y < y)
+			{
+				aniId = ID_ANI_FirePlant_UP_LEFT;
+			}
+			else
+				aniId = ID_ANI_FirePlant_LEFT;
+		}
+	}
+	else if (typePlant == 1)
+	{
+		if (nx > 0)
+		{
+			if (Mario_y < y) {
+				aniId = ID_ANI_Fire_GreenPlant_UP_RIGHT;
+			}
+			else
+				aniId = ID_ANI_Fire_GreenPlant_RIGHT;
+		}
+		else
+		{
+			if (Mario_y < y)
+			{
+				aniId = ID_ANI_Fire_GreenPlant_UP_LEFT;
+			}
+			else
+				aniId = ID_ANI_Fire_GreenPlant_LEFT;
+		}
 	}
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
 	RenderBoundingBox();

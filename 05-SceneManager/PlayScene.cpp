@@ -182,7 +182,12 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		cb->b4 = br4;
 		break;
 	}
-	case OBJECT_TYPE_FIREPLANT: obj = new CFirePlant(x, y); break;
+	case OBJECT_TYPE_FIREPLANT:
+	{
+		int Type = atoi(tokens[3].c_str());
+		obj = new CFirePlant(x, y, Type); 
+		break;
+	}
 	case OBJECT_TYPE_QUESTIONBRICK:
 	{
 		int Type = atoi(tokens[3].c_str());
