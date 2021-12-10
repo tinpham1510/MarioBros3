@@ -6,6 +6,7 @@ enum ItemType
 	Undefined = -1,
 	Coin,
 	Mushroom,
+	pbutton,
 };
 
 class Item : public CGameObject
