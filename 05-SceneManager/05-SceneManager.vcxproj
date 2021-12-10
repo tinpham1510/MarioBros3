@@ -156,6 +156,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Goomba.cpp" />
     <ClCompile Include="GoombaRed.cpp" />
+    <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Koopas.cpp" />
     <ClCompile Include="KoopasFly.cpp" />
     <ClCompile Include="KoopasObject.cpp" />
@@ -193,6 +194,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Goomba.h" />
     <ClInclude Include="GoombaRed.h" />
+    <ClInclude Include="HUD.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="KeyEventHandler.h" />
     <ClInclude Include="Koopas.h" />
@@ -218,7 +220,8 @@
     <ClInclude Include="FirePlant.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="pbutton.txt" />
+    <Text Include="hud.txt" />
+    <Text Include="item.txt" />
     <Text Include="pipe.txt" />
     <Text Include="fireplant.txt" />
   </ItemGroup>

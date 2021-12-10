@@ -138,6 +138,9 @@
     <ClCompile Include="Pbutton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HUD.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collision.h">
@@ -254,6 +257,9 @@
     <ClInclude Include="Pbutton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HUD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="pipe.txt">
@@ -262,6 +268,7 @@
     <Text Include="fireplant.txt">
       <Filter>Object</Filter>
     </Text>
-    <Text Include="pbutton.txt" />
+    <Text Include="hud.txt" />
+    <Text Include="item.txt" />
   </ItemGroup>
 </Project>

@@ -12,7 +12,7 @@
 #include "Mushroom.h"
 #include "QuestionBrick.h"
 #include "Item.h"
-
+#include "HUD.h"
 
 
 //#include "Koopas.h"
@@ -26,6 +26,7 @@ protected:
 	// A play scene has to have player, right? 
 	LPGAMEOBJECT player;					
 	Map* map;
+	HUD* hud = HUD::GetInstance();
 	vector<Item*> items;
 	vector<CQuestionBrick*> qb;
 	vector<LPGAMEOBJECT> objects;

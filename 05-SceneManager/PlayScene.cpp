@@ -389,17 +389,17 @@ void CPlayScene::Update(DWORD dt)
 		cy = float(map->GetMapHeight() - game->GetBackBufferHeight());
 	}
 
-	CGame::GetInstance()->SetCamPos(cx, cy);
+	CGame::GetInstance()->SetCamPos(cx, cy + ScreenH);
 
 	PurgeDeletedObjects();
 }
 
 void CPlayScene::Render()
 {
-	//map->DrawMap();
+	map->DrawMap();
 	for (int i = 0; i < objects.size(); i++)
 		objects[i]->Render();
-	
+	hud->Render();
 }
 
 /*
