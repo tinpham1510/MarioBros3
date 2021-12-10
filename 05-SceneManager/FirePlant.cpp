@@ -11,10 +11,20 @@ CFirePlant::CFirePlant(float x, float y, int typeF) :CGameObject(x, y)
 
 void CFirePlant::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
+	if (typePlant < 2)
+	{
 		left = x - FirePlant_BBOX_WIDTH / 2;
 		top = y - FirePlant_BBOX_HEIGHT / 2;
 		right = left + FirePlant_BBOX_WIDTH;
 		bottom = top + FirePlant_BBOX_HEIGHT;
+	}
+	else
+	{
+		left = x - GreenPlant_BBOX_WIDTH / 2;
+		top = y - GreenPlant_BBOX_HEIGHT / 2;
+		right = left + GreenPlant_BBOX_WIDTH;
+		bottom = top + GreenPlant_BBOX_HEIGHT;
+	}
 }
 
 void CFirePlant::OnNoCollision(DWORD dt)
@@ -134,6 +144,10 @@ void CFirePlant::Render()
 			else
 				aniId = ID_ANI_Fire_GreenPlant_LEFT;
 		}
+	}
+	else
+	{
+		aniId = ID_ANI_GreenPlant_MOUTH;
 	}
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
 	RenderBoundingBox();

@@ -7,15 +7,20 @@
 #define ID_ANI_FirePlant_UP_LEFT	10003
 #define ID_ANI_FirePlant_UP_RIGHT	10004
 
-//---------------------------GREEN PLANT
+//---------------------------FIRE GREEN PLANT
 #define ID_ANI_Fire_GreenPlant_LEFT 10005
 #define ID_ANI_Fire_GreenPlant_RIGHT	10006
 #define ID_ANI_Fire_GreenPlant_UP_LEFT	10007
 #define ID_ANI_Fire_GreenPlant_UP_RIGHT	10008
 
+//----------------------------GREEN PLANT
+#define ID_ANI_GreenPlant_MOUTH 10009
 
 #define FirePlant_BBOX_WIDTH 16
 #define FirePlant_BBOX_HEIGHT 32
+
+#define GreenPlant_BBOX_WIDTH 16
+#define GreenPlant_BBOX_HEIGHT 26
 
 
 #define FirePlant_STATE_APPEAR	100
