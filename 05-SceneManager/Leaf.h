@@ -15,16 +15,16 @@
 #define LEAF_STATE_COLLISION	300
 class Leaf : public Item {
 public:
-
+	ULONGLONG timeFalling;
+	float ax;
 	Leaf(float x, float y);
 	void Render();
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void GetBoundingBox(float& l, float& t, float& r, float& b);
 	virtual void OnNoCollision(DWORD dt);
-
-	virtual void OnCollisionWith(LPCOLLISIONEVENT e);
 	virtual int IsBlocking() { return 0; }
+	virtual int IsCollidable() { return 1; };
 	virtual void SetState(int state);
 	void setDirectItem(int nx);
-
-}
+	~Leaf() {};
+};

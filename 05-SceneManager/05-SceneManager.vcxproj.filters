@@ -135,11 +135,14 @@
     <ClCompile Include="Animations.cpp">
       <Filter>Animation</Filter>
     </ClCompile>
-    <ClCompile Include="Pbutton.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="HUD.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Leaf.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Pbutton.cpp">
+      <Filter>Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -254,11 +257,14 @@
     <ClInclude Include="AssetIDs.h">
       <Filter>Animation</Filter>
     </ClInclude>
-    <ClInclude Include="Pbutton.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="HUD.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Leaf.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Pbutton.h">
+      <Filter>Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
