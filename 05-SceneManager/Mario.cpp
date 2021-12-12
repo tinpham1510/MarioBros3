@@ -1,6 +1,6 @@
 #include <algorithm>
 #include "debug.h"
-
+#include "AssetIDs.h"
 #include "Mario.h"
 #include "Game.h"
 
@@ -64,13 +64,13 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			SetState(MARIO_STATE_RELEASE_JUMP);
 		}
 	}
-	DebugOut(L"vy: %d\n", vy);
-	//if (isFlying == true)
-	//{
-	//	DebugOut(L"true\n");
-	//}
-	//else
-	//	DebugOut(L"false\n");
+	//DebugOut(L"vy: %d\n", vy);
+	/*if (isPressed == true)
+	{
+		DebugOut(L"true\n");
+	}
+	else
+		DebugOut(L"false\n");*/
 	if (powerStack == MARIO_MAX_POWER)
 	{
 		//SetState(MARIO_STATE_FLYING);
@@ -125,6 +125,19 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		if (GetTickCount64() - timeAttacking > MARIO_TIME_ATTACKING)
 		{
 			isAttacking = false;
+		}
+	}
+
+	if (isPressed)
+	{
+		isPressed = false;
+		for (UINT i = 0; i < coObjects->size(); i++)
+		{
+			if (coObjects->at(i)->type == OBJECT_TYPE_BRICK)
+			{
+				CBrick* cb = dynamic_cast<CBrick*>(coObjects->at(i));
+				cb->SetState(BRICK_STATE_CHANGE_COIN);
+			}
 		}
 	}
 	CCollision::GetInstance()->Process(this, dt, coObjects);
@@ -190,10 +203,12 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 void CMario::OnCollisionWithPbutton(LPCOLLISIONEVENT e)
 {
 	Pbutton* pb = dynamic_cast<Pbutton*>(e->obj);
+
 	if (e->ny < 0)
 	{
-		if (pb->GetState() != PBUTTON_STATE_COLLISION)
-		{
+		if (pb->GetState() == PBUTTON_STATE_NORMAL)
+		{	
+			isPressed = true;
 			pb->SetState(PBUTTON_STATE_COLLISION);
 		}
 	}
@@ -216,6 +231,13 @@ void CMario::OnCollisionWithB(LPCOLLISIONEVENT e)
 		{
 			cb->SetState(BRICK_STATE_BROKEN);
 		}
+	}
+	
+	
+	if (cb->GetState() == BRICK_STATE_CHANGE_COIN)
+	{
+		e->obj->Delete();
+		coin++;
 	}
 }
 
@@ -291,9 +313,6 @@ void CMario::OnCollisionWithCoin(LPCOLLISIONEVENT e)
 		coin++;
 		e->obj->Delete();
 	}
-	
-	
-	
 }
 
 void CMario::OnCollisionWithPortal(LPCOLLISIONEVENT e)
