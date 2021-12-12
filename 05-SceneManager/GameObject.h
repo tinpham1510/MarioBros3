@@ -67,7 +67,6 @@ public:
 	virtual int IsBlocking() { return 1; }
 
 	virtual void DirectBlocking(int& l, int& t, int& r, int& b) { l = 1; t = 1; r = 1; b = 1; } //four direct
-
 	//virtual int IsBlockingOnTop() { return 1; } two direct
 
 	//virtual int IsBlockingOnSide() { return 1; }
