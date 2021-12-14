@@ -253,8 +253,9 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		int sprite_id_2 = atoi(tokens[7].c_str());
 		int sprite_id_3 = atoi(tokens[8].c_str());
 		int sprite_id_4 = atoi(tokens[9].c_str());
+		int Type = atoi(tokens[10].c_str());
 		obj = new CPipe(x, y, cell_width * length, cell_height,
-			cell_width, cell_height, length, sprite_id_1, sprite_id_2, sprite_id_3, sprite_id_4);
+			cell_width, cell_height, length, sprite_id_1, sprite_id_2, sprite_id_3, sprite_id_4, Type);
 		break;
 	}
 	case OBJECT_TYPE_PORTAL:

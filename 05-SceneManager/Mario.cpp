@@ -351,11 +351,14 @@ void CMario::OnCollisionWithPortal(LPCOLLISIONEVENT e)
 void CMario::OnCollisionWithPipe(LPCOLLISIONEVENT e)
 {
 	CPipe* pipe = dynamic_cast<CPipe*>(e->obj);
-	if (e->ny < 0 && isSitting)
+	if (pipe->typePipe != 0)
 	{
-		isChangingScene = true;
-		SetState(MARIO_STATE_FALLDOWN_PIPE);
-		pipe->isSwitchScene = true;
+		if (e->ny < 0 && isSitting)
+		{
+			isChangingScene = true;
+			SetState(MARIO_STATE_FALLDOWN_PIPE);
+			pipe->isSwitchScene = true;
+		}
 	}
 }
 
