@@ -222,6 +222,7 @@
     <ClInclude Include="FirePlant.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="HiddenWorld.txt" />
     <Text Include="hud.txt" />
     <Text Include="item.txt" />
     <Text Include="pipe.txt" />

@@ -276,5 +276,6 @@
     </Text>
     <Text Include="hud.txt" />
     <Text Include="item.txt" />
+    <Text Include="HiddenWorld.txt" />
   </ItemGroup>
 </Project>
