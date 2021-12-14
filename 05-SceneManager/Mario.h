@@ -25,7 +25,7 @@
 
 #define MARIO_POWER_TIME_STACK 200
 
-#define MARIO_TIME_SHOWING_FLYING 3000
+#define MARIO_TIME_SHOWING_FLYING 5000
 
 #define MARIO_TIME_ATTACKING 240
 
@@ -209,6 +209,7 @@ class CMario : public CGameObject
 	void OnCollisionWithB(LPCOLLISIONEVENT e);
 	void OnCollisionWithPbutton(LPCOLLISIONEVENT e);
 	void OnCollisionWithMushroom(LPCOLLISIONEVENT e);
+	void OnCollisionWithLeaf(LPCOLLISIONEVENT e);
 	void OnCollisionWithKoopas(LPCOLLISIONEVENT e);
 	void OnCollisionWithKoopasFly(LPCOLLISIONEVENT e);
 	void OnCollisionWithRedGoomba(LPCOLLISIONEVENT e);

@@ -388,7 +388,7 @@ void CPlayScene::Update(DWORD dt)
 	cy -= game->GetBackBufferHeight() / 2;
 
 	if (cx < 0) cx = 0;
-	if (cy < 0) cy = 0;
+	if (cy < 0) cy = -1;
 	if (cx > map->GetMapWidth() - game->GetBackBufferWidth() - ScreenH) {
 		cx = float(map->GetMapWidth() - game->GetBackBufferWidth()- ScreenH);
 	}

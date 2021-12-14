@@ -17,6 +17,7 @@
 #include "FirePlant.h"
 #include "Brick.h"
 #include "Pbutton.h"
+#include "Leaf.h"
 
 
 #include "Collision.h"
@@ -198,7 +199,27 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		OnCollisionWithB(e);
 	else if (dynamic_cast<Pbutton*>(e->obj))
 		OnCollisionWithPbutton(e);
+	else if (dynamic_cast<Leaf*>(e->obj))
+		OnCollisionWithLeaf(e);
 }
+
+void CMario::OnCollisionWithLeaf(LPCOLLISIONEVENT e)
+{
+	Leaf* leaf = dynamic_cast<Leaf*>(e->obj);
+
+	if (e->nx != 0 || e->ny > 0)
+	{
+		if (leaf->GetState() == LEAF_STATE_FALLING)
+		{
+			leaf->SetState(LEAF_STATE_COLLISION);
+			if (level < MARIO_LEVEL_SMALL)
+			{
+				level++;
+			}
+		}
+	}
+}
+
 
 void CMario::OnCollisionWithPbutton(LPCOLLISIONEVENT e)
 {
