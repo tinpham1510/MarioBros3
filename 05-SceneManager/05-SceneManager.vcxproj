@@ -229,6 +229,7 @@
     <Text Include="item.txt" />
     <Text Include="pipe.txt" />
     <Text Include="fireplant.txt" />
+    <Text Include="scene-mario.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
