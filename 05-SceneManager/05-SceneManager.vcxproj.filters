@@ -34,6 +34,9 @@
     <Filter Include="Animation">
       <UniqueIdentifier>{5be29453-0072-48e3-8403-7600e2157c2a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Hud">
+      <UniqueIdentifier>{0184da44-1d43-428d-843d-075c330c3343}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -135,14 +138,17 @@
     <ClCompile Include="Animations.cpp">
       <Filter>Animation</Filter>
     </ClCompile>
-    <ClCompile Include="HUD.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Leaf.cpp">
       <Filter>Item</Filter>
     </ClCompile>
     <ClCompile Include="Pbutton.cpp">
       <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD.cpp">
+      <Filter>Hud</Filter>
+    </ClCompile>
+    <ClCompile Include="StackSpeed.cpp">
+      <Filter>Hud</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -257,14 +263,17 @@
     <ClInclude Include="AssetIDs.h">
       <Filter>Animation</Filter>
     </ClInclude>
-    <ClInclude Include="HUD.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Leaf.h">
       <Filter>Item</Filter>
     </ClInclude>
     <ClInclude Include="Pbutton.h">
       <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="HUD.h">
+      <Filter>Hud</Filter>
+    </ClInclude>
+    <ClInclude Include="StackSpeed.h">
+      <Filter>Hud</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -274,8 +283,12 @@
     <Text Include="fireplant.txt">
       <Filter>Object</Filter>
     </Text>
-    <Text Include="hud.txt" />
-    <Text Include="item.txt" />
     <Text Include="HiddenWorld.txt" />
+    <Text Include="hud.txt">
+      <Filter>Hud</Filter>
+    </Text>
+    <Text Include="item.txt">
+      <Filter>Item</Filter>
+    </Text>
   </ItemGroup>
 </Project>
