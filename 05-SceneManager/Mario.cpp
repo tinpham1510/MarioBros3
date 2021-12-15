@@ -289,7 +289,14 @@ void CMario::OnCollisionWithGoomba(LPCOLLISIONEVENT e )
 		{
 			if (goomba->GetState() != GOOMBA_STATE_DIE)
 			{
-				if (level > MARIO_LEVEL_SMALL)
+				if (level > MARIO_LEVEL_SMALL && isHoldKoopas)
+				{
+					level--;
+					StartUntouchable();
+					SetState(MARIO_STATE_DROP_KOOPAS_SHELL);
+
+				}
+				else if (level > MARIO_LEVEL_SMALL)
 				{
 					level--;
 					StartUntouchable();
@@ -1133,6 +1140,11 @@ void CMario::SetState(int state)
 		vy = -MARIO_SPEED_SWITCH_SCENE;
 		vx = 0.0f;
 		ax = 0.0f;
+		break;
+	case MARIO_STATE_DROP_KOOPAS_SHELL:
+		isHoldKoopas = false;
+		koopas->nx = nx;
+		koopas->SetState(KOOPAS_STATE_DIE);
 		break;
 	}
 

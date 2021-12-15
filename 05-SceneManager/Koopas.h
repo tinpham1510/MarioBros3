@@ -5,6 +5,8 @@
 #define KOOPAS_SHELL_SPEED 0.2f
 #define KOOPAS_DEFLECT_SPEED_Y 0.5f
 
+#define KOOPAS_DIE_SPEED	0.1f
+
 #define KOOPAS_BBOX_WIDTH 14
 #define KOOPAS_BBOX_HEIGHT 28
 #define KOOPAS_BBOX_HEIGHT_SHELL 14
@@ -13,6 +15,7 @@
 #define KOOPAS_RETURN_LIFE 2000
 #define KOOPAS_TIME_COLLISION 100
 #define KOOPAS_TIME_STOP_MOVING	500
+#define KOOPAS_TIME_DIE	500
 
 
 #define KOOPAS_STATE_WALKING 200
@@ -22,6 +25,7 @@
 #define KOOPAS_STATE_SHELL_UP	600
 #define KOOPAS_STATE_SHELL_UP_MOVING 700
 #define	KOOPAS_STATE_REBORN_UP	800
+#define KOOPAS_STATE_DIE	900
 
 
 
@@ -43,6 +47,7 @@ protected:
 	ULONGLONG TimeCollision;
 	ULONGLONG timeReturn;
 	ULONGLONG die_start;
+	ULONGLONG timeDie;
 	ULONGLONG shell_start;
 	ULONGLONG timeMoving;
 	float objX;
@@ -54,7 +59,7 @@ protected:
 	void OnCollisionWithRedGoomba(LPCOLLISIONEVENT e);
 	void OnCollisionWithQB(LPCOLLISIONEVENT e);
 	void OnCollisionWithBrick(LPCOLLISIONEVENT e);
-	virtual int IsCollidable() { return 1; };
+	virtual int IsCollidable() { return (state != KOOPAS_STATE_DIE); };
 
 	virtual int IsBlocking() { return 0; }
 	virtual void OnNoCollision(DWORD dt);
