@@ -136,6 +136,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	{
 	case OBJECT_TYPE_MARIO:
 	{
+	
 		if (player != NULL)
 		{
 			DebugOut(L"[ERROR] MARIO object was created before!\n");
