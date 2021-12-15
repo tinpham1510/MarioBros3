@@ -24,7 +24,7 @@ class CPlayScene: public CScene
 {
 protected: 
 	// A play scene has to have player, right? 
-	LPGAMEOBJECT player;					
+	CMario* player = CMario::GetInstance();					
 	Map* map;
 	HUD* hud = HUD::GetInstance();
 	vector<Item*> items;
