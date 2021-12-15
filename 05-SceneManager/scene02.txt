@@ -22,7 +22,7 @@ item.txt
 # See OBJECT_TYPE constants in AssetIDs.h
 
 # MARIO
-0	1930	10
+0	730	10
 
 #item
 6	176	336	0	1

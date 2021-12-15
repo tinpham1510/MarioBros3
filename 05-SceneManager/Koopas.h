@@ -3,6 +3,7 @@
 #define KOOPAS_GRAVITY 0.002f
 #define KOOPAS_WALKING_SPEED 0.05f
 #define KOOPAS_SHELL_SPEED 0.2f
+#define KOOPAS_DEFLECT_SPEED_Y 0.5f
 
 #define KOOPAS_BBOX_WIDTH 14
 #define KOOPAS_BBOX_HEIGHT 28
@@ -11,6 +12,7 @@
 #define KOOPAS_DIE_TIMEOUT	8000
 #define KOOPAS_RETURN_LIFE 2000
 #define KOOPAS_TIME_COLLISION 100
+#define KOOPAS_TIME_STOP_MOVING	500
 
 
 #define KOOPAS_STATE_WALKING 200
@@ -42,6 +44,7 @@ protected:
 	ULONGLONG timeReturn;
 	ULONGLONG die_start;
 	ULONGLONG shell_start;
+	ULONGLONG timeMoving;
 	float objX;
 	float objY;
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);

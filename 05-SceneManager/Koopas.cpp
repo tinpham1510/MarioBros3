@@ -180,6 +180,14 @@ void CKoopas::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		}
 	}
 
+	if (state == KOOPAS_STATE_SHELL_UP)
+	{
+		if (GetTickCount64() - timeMoving > KOOPAS_TIME_STOP_MOVING)
+		{
+			vx = 0;
+		}
+	}
+	
 	if ((state == KOOPAS_STATE_SHELL) && GetTickCount64() - die_start > KOOPAS_DIE_TIMEOUT)
 	{
 		SetState(KOOPAS_STATE_REBORN);
@@ -273,8 +281,9 @@ void CKoopas::SetState(int state)
 	case KOOPAS_STATE_SHELL_UP:
 		y += (KOOPAS_BBOX_HEIGHT - KOOPAS_BBOX_HEIGHT_SHELL) / 2;
 		die_start = GetTickCount64();
-		vx = 0;
-		vy = -0.5f;
+		timeMoving = GetTickCount64();
+		vx = KOOPAS_WALKING_SPEED * nx;
+		vy = -KOOPAS_DEFLECT_SPEED_Y;
 		break;
 	case KOOPAS_STATE_SHELL_UP_MOVING:
 		vx = KOOPAS_SHELL_SPEED * nx;

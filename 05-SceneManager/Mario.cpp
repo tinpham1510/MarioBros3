@@ -99,10 +99,10 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	{
 		if (nx >= 0)
 		{
-			koopas->SetPosition(x + MARIO_RACOON_BBOX_WIDTH /2 + KOOPAS_BBOX_WIDTH/2 + 2 , y);
+			koopas->SetPosition(x + MARIO_RACOON_BBOX_WIDTH /2 + KOOPAS_BBOX_WIDTH/2 + RANGE_BETWEEN_OBJECT , y);
 		}
 		else
-			koopas->SetPosition(x - MARIO_RACOON_BBOX_WIDTH /2 - KOOPAS_BBOX_WIDTH/2 - 2, y);
+			koopas->SetPosition(x - MARIO_RACOON_BBOX_WIDTH /2 - KOOPAS_BBOX_WIDTH/2 - RANGE_BETWEEN_OBJECT, y);
 		
 		if (koopas->GetState() == KOOPAS_STATE_WALKING)
 		{
@@ -124,6 +124,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	if (isAttacking)
 	{
 		tail->SetPosition((nx < 0) ? (x - MARIO_BIG_BBOX_WIDTH / 2 - TAIL_BBOX_WIDTH / 2) : (x + MARIO_BIG_BBOX_WIDTH / 2 + TAIL_BBOX_WIDTH / 2) , y + 6);
+		tail->SetDirect(nx);
 		if (GetTickCount64() - timeAttacking > MARIO_TIME_ATTACKING)
 		{
 			isAttacking = false;
@@ -217,7 +218,7 @@ void CMario::OnCollisionWithLeaf(LPCOLLISIONEVENT e)
 		if (leaf->GetState() == LEAF_STATE_FALLING)
 		{
 			leaf->SetState(LEAF_STATE_COLLISION);
-			if (level < MARIO_LEVEL_SMALL)
+			if (level < MARIO_LEVEL_RACOON)
 			{
 				level++;
 			}
@@ -412,18 +413,21 @@ void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e) {
 	{
 		if (untouchable == 0)
 		{
-			if (kp->GetState() != KOOPAS_STATE_SHELL && kp->GetState() != KOOPAS_STATE_SHELL_UP)
+			if (!isHoldKoopas)
 			{
-				if (level > MARIO_LEVEL_SMALL)
+				if (kp->GetState() != KOOPAS_STATE_SHELL && kp->GetState() != KOOPAS_STATE_SHELL_UP)
 				{
-					level--;
-					StartUntouchable();
-					
-				}
-				else
-				{
-					DebugOut(L">>> Mario DIE >>> \n");
-					SetState(MARIO_STATE_DIE);
+					if (level > MARIO_LEVEL_SMALL)
+					{
+						level--;
+						StartUntouchable();
+
+					}
+					else
+					{
+						DebugOut(L">>> Mario DIE >>> \n");
+						SetState(MARIO_STATE_DIE);
+					}
 				}
 			}
 		}
@@ -1024,7 +1028,12 @@ void CMario::SetState(int state)
 		koopas->nx = nx;
 		koopas->ay = KOOPAS_GRAVITY;
 		koopas->isHold = false;
-		koopas->SetState(KOOPAS_STATE_SHELL_MOVING);
+		if (koopas->GetState() == KOOPAS_STATE_SHELL)
+		{
+			koopas->SetState(KOOPAS_STATE_SHELL_MOVING);
+		}
+		else
+			koopas->SetState(KOOPAS_STATE_SHELL_UP_MOVING);
 		break;
 	case MARIO_STATE_RELEASE_HOLDING_A:
 		isHoldKoopas = false;
