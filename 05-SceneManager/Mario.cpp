@@ -391,7 +391,9 @@ void CMario::OnCollisionWithMushroom(LPCOLLISIONEVENT e) {
 		e->obj->Delete();
 		if (level < MARIO_LEVEL_RACOON)
 		{
+			SetLevel(level);
 			level++;
+			
 		}
 
 	}
@@ -1202,7 +1204,7 @@ void CMario::SetLevel(int l)
 {
 
 	// Adjust position to avoid falling off platform
-	if (this->level == MARIO_LEVEL_SMALL)
+	if (level == MARIO_LEVEL_SMALL)
 	{
 		if (nx == 1)
 		{
