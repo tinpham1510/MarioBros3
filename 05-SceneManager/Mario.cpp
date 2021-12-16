@@ -1216,7 +1216,7 @@ void CMario::SetLevel(int l)
 }
 
 void CMario::IncreasePower() {
-	if (powerStack <= MARIO_MAX_POWER)
+	if (powerStack < MARIO_MAX_POWER)
 	{
 		if (timeStack == 0)
 			timeStack = GetTickCount64();

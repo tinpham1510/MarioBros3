@@ -38,7 +38,7 @@
 
 #define MARIO_TIME_SWITCH_SCENE 1000
 
-#define MARIO_MAX_POWER	6
+#define MARIO_MAX_POWER	7
 
 
 #define MARIO_WIDTH_COLLISION 2 // define variable to scale range between small and big width
