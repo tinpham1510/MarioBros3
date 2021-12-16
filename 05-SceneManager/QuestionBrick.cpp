@@ -32,7 +32,7 @@ void CQuestionBrick::Render()
 		}
 		
 	}
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }
 
 void CQuestionBrick::SetState(int state) {

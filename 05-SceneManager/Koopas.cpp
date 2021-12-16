@@ -264,7 +264,7 @@ void CKoopas::Render()
 	}
 
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }
 
 void CKoopas::SetState(int state)

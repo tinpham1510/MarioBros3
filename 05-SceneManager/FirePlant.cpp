@@ -197,7 +197,7 @@ void CFirePlant::Render()
 		aniId = ID_ANI_GreenPlant_MOUTH;
 	}
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }
 
 void CFirePlant::SetState(int state)

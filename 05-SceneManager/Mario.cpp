@@ -438,6 +438,7 @@ void CMario::OnCollisionWithKoopas(LPCOLLISIONEVENT e) {
 			{
 				if (kp->GetState() != KOOPAS_STATE_SHELL && kp->GetState() != KOOPAS_STATE_SHELL_UP)
 				{
+
 					if (level > MARIO_LEVEL_SMALL)
 					{
 						level--;
@@ -966,11 +967,11 @@ void CMario::Render()
 	animations->Get(aniId)->Render(x, y);
 	if (level == MARIO_LEVEL_RACOON)
 	{
-		tail->Render();
+		//tail->Render();
 	}
-	RenderBoundingBox();
+	//RenderBoundingBox();
 
-	DebugOutTitle(L"Coins: %d", coin);
+	//DebugOutTitle(L"Coins: %d", coin);
 }
 
 void CMario::SetState(int state)

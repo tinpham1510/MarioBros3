@@ -23,7 +23,7 @@ void Leaf::Render()
 		else
 			animations->Get(ID_ANI_LEAF_FALL_LEFT)->Render(x, y);
 	}
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }
 
 void Leaf::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {

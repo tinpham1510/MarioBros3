@@ -15,7 +15,7 @@ void BrokenEffect::Render()
 	{
 		animations->Get(ID_ANI_BROKEN_EFFECT)->Render(x, y);
 	}
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }
 
 void BrokenEffect::OnNoCollision(DWORD dt)

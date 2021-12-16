@@ -3,7 +3,7 @@
 #include "Textures.h"
 void ColorBox::Render()
 {
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }
 
 void ColorBox::GetBoundingBox(float& left, float& top, float& right, float& bottom) {

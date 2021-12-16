@@ -144,7 +144,7 @@ void CGoombaRed::Render()
 	}
 
 	CAnimations::GetInstance()->Get(aniId)->Render(x, y);
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }
 
 void CGoombaRed::SetState(int state)

@@ -14,7 +14,7 @@ void Pbutton::Render()
 	}
 
 
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }
 
 void Pbutton::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
