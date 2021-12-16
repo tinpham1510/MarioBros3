@@ -88,6 +88,10 @@ void CGoombaRed::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	else
 		nx = 1;
 
+	if (state == REDGOOMBA_STATE_DIE_T)
+	{
+		vy = -REDGOOMBA_DEFLECT_SPEED_JUMP;
+	}
 
 	if (state != REDGOOMBA_STATE_WALKING)
 	{
@@ -168,6 +172,9 @@ void CGoombaRed::SetState(int state)
 		vx = 0;
 		vy = 0;
 		ay = 0;
+		break;
+	case REDGOOMBA_STATE_DIE_T:
+		die_start = GetTickCount64();
 		break;
 	case REDGOOMBA_STATE_WALKING:
 		vx = REDGOOMBA_WALKING_SPEED * nx;
