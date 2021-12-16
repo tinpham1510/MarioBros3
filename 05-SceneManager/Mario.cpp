@@ -584,7 +584,14 @@ void CMario::OnCollisionWithRedGoomba(LPCOLLISIONEVENT e) {
 		{
 			if (rgb->GetState() != GOOMBA_STATE_DIE)
 			{
-				if (level > MARIO_LEVEL_SMALL)
+				if (level > MARIO_LEVEL_SMALL && isHoldKoopas)
+				{
+					level--;
+					StartUntouchable();
+					SetState(MARIO_STATE_DROP_KOOPAS_SHELL);
+
+				}
+				else if (level > MARIO_LEVEL_SMALL)
 				{
 					level--;
 					StartUntouchable();
