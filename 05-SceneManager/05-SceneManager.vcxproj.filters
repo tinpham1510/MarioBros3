@@ -150,6 +150,9 @@
     <ClCompile Include="StackSpeed.cpp">
       <Filter>Hud</Filter>
     </ClCompile>
+    <ClCompile Include="FireBullet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collision.h">
@@ -275,6 +278,9 @@
     <ClInclude Include="StackSpeed.h">
       <Filter>Hud</Filter>
     </ClInclude>
+    <ClInclude Include="FireBullet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="pipe.txt">
@@ -291,5 +297,6 @@
       <Filter>Item</Filter>
     </Text>
     <Text Include="scene-mario.txt" />
+    <Text Include="firebullet.txt" />
   </ItemGroup>
 </Project>
