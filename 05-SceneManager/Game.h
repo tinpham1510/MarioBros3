@@ -52,6 +52,7 @@ class CGame
 
 	ID3D10SamplerState* pPointSamplerState;
 
+
 	unordered_map<int, LPSCENE> scenes;
 	int current_scene;
 	int next_scene = -1;
@@ -60,6 +61,7 @@ class CGame
 	void _ParseSection_SCENES(string line);
 
 public:
+	int nextX = 0, nextY = 0;
 	// Init DirectX, Sprite Handler
 	void Init(HWND hWnd, HINSTANCE hInstance);
 

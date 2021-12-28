@@ -21,6 +21,7 @@
 #include "BrokenEffect.h"
 #include "Pbutton.h"
 #include "Leaf.h"
+#include "FireBullet.h"
 
 #include "SampleKeyEventHandler.h"
 
@@ -144,9 +145,12 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 			return;
 		}
 		obj = new CMario(x, y);
+		if (CGame::GetInstance()->nextX != 0 && CGame::GetInstance()->nextY != 0)
+		{
+			obj->SetPosition(CGame::GetInstance()->nextX, CGame::GetInstance()->nextY);
+		}
 		player = (CMario*)obj;
 		CMario::SetInstance((CMario*)obj);
-
 		tail = new CTail(x, y);
 		objects.push_back(tail);
 		CMario* ma = dynamic_cast<CMario*>(obj);
@@ -268,7 +272,9 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		float r = (float)atof(tokens[3].c_str());
 		float b = (float)atof(tokens[4].c_str());
 		int scene_id = atoi(tokens[5].c_str());
-		obj = new CPortal(x, y, r, b, scene_id);
+		int X = (int)atoi(tokens[6].c_str());
+		int Y = (int)atoi(tokens[7].c_str());
+		obj = new CPortal(x, y, r, b, scene_id, X, Y);
 	}
 	break;
 
@@ -279,6 +285,8 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	}
 
 	// General object setup
+	
+	if(!dynamic_cast<CMario*>(obj))
 	obj->SetPosition(x, y);
 
 
@@ -385,6 +393,7 @@ void CPlayScene::Update(DWORD dt)
 
 	// Update camera to follow mario
 	float cx, cy;
+	
 	player->GetPosition(cx, cy);
 	camera->SetPosition(cx, cy);
 
