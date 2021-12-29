@@ -1,5 +1,5 @@
 #include "StackSpeed.h"
-void StackSpeed::RenderStack(int x, int y, int stack)
+void StackSpeed::RenderStack(float x, float y, int stack)
 {
 	CAnimations* animations = CAnimations::GetInstance();
 	for (int i = 0; i < stack; i++)

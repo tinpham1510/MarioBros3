@@ -4,15 +4,20 @@
 #include "Animations.h"
 #include "Game.h"
 #include "StackSpeed.h"
+#include "EndGame.h"
 #define ID_ANI_HUD	15000
 #define ID_ANI_ITEM	15001
+
+#define ID_ANI_ITEM_MUSHROOM_ENDGAME	15004
+#define ID_ANI_ITEM_STAR	15005
+#define ID_ANI_ITEM_PLANT	15006
 
 #define SCREEN_H 64
 #define SCREEN_W	84
 #define SCREEN_W_PLUS	10
 #define SCREEN_PLUS	12
 
-
+#define ITEM_BBOX_WIDTH	24
 class HUD: public CGameObject
 {
 public:
@@ -21,6 +26,7 @@ public:
 public:
 	int stack;
 	int time;
+	EndGame* eg;
 	HUD() {
 		time = 300;
 		stack = 0;

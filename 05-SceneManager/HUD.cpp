@@ -1,5 +1,5 @@
 #include "HUD.h"
-
+#include "debug.h"
 HUD* HUD::__instance = NULL;
 HUD* HUD::GetInstance()
 {
@@ -19,9 +19,11 @@ void HUD::Render()
 	{
 		stackspeed->RenderStack(CGame::GetInstance()->GetCamX() + 66, y + 7, stack);
 	}
+
+
 }
 
 void HUD::Update(DWORD dt)
 {
-	
+	//float y = eg->first_y;
 }

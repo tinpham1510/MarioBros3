@@ -8,7 +8,7 @@ class StackSpeed: public CGameObject
 {
 public:
 	StackSpeed() {};	
-	void RenderStack(int x, int y, int stack);
+	void RenderStack(float x, float y, int stack);
 	virtual void Render() {  };
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom) {};
 
