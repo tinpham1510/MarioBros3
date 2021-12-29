@@ -46,7 +46,7 @@ void FireBullet::OnCollisionWith(LPCOLLISIONEVENT e)
 	CMario* mario = dynamic_cast<CMario*>(e->obj);
 	if (e->nx != 0 || e->ny != 0)
 	{
-		mario->CollisionMario();
+		//mario->CollisionMario();
 	}
 }
 

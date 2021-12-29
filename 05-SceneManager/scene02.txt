@@ -23,7 +23,7 @@ firebullet.txt
 # See OBJECT_TYPE constants in AssetIDs.h
 
 # MARIO
-0	200	10
+0	2300	10
 
 #item
 6	176	336	0	1
