@@ -153,6 +153,9 @@
     <ClCompile Include="FireBullet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="EndGame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collision.h">
@@ -281,6 +284,9 @@
     <ClInclude Include="FireBullet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="EndGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="pipe.txt">
@@ -298,5 +304,6 @@
     </Text>
     <Text Include="scene-mario.txt" />
     <Text Include="firebullet.txt" />
+    <Text Include="endgame.txt" />
   </ItemGroup>
 </Project>

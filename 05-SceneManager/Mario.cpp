@@ -19,6 +19,7 @@
 #include "Pbutton.h"
 #include "Leaf.h"
 #include "HUD.h"
+#include "EndGame.h"
 
 
 
@@ -212,6 +213,8 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 		OnCollisionWithPbutton(e);
 	else if (dynamic_cast<Leaf*>(e->obj))
 		OnCollisionWithLeaf(e);
+	else if (dynamic_cast<EndGame*>(e->obj))
+		OnCollisionWithEndGameItem(e);
 }
 
 
@@ -611,6 +614,16 @@ void CMario::OnCollisionWithPlant(LPCOLLISIONEVENT e)
 	if (untouchable == 0)
 	{
 		CollisionMario();
+	}
+}
+
+void CMario::OnCollisionWithEndGameItem(LPCOLLISIONEVENT e)
+{
+	EndGame* item = dynamic_cast<EndGame*>(e->obj);
+	if (e->ny != 0 || e->nx != 0)
+	{
+		item->SetState(ENDGAME_ITEM_STATE_MOVING_UP);
+		vy = 0;
 	}
 }
 //

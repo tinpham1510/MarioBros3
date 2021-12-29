@@ -22,6 +22,7 @@
 #include "Pbutton.h"
 #include "Leaf.h"
 #include "FireBullet.h"
+#include "EndGame.h"
 
 #include "SampleKeyEventHandler.h"
 
@@ -226,6 +227,12 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 			break;
 		}
 		items.push_back(dynamic_cast<Item*>(obj));
+		break;
+	}
+
+	case OBJECT_TYPE_ITEM_ENDGAME:
+	{
+		obj = new EndGame(x, y);
 		break;
 	}
 	case OBJECT_TYPE_PLATFORM:

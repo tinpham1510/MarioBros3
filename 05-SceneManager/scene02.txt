@@ -13,6 +13,7 @@ pipe.txt
 hud.txt
 item.txt
 firebullet.txt
+endgame.txt
 #
 [MAP]
 30	map1.txt	27	176	11	11	0
@@ -23,7 +24,7 @@ firebullet.txt
 # See OBJECT_TYPE constants in AssetIDs.h
 
 # MARIO
-0	2300	10
+0	2600	10
 
 #item
 6	176	336	0	1
@@ -95,7 +96,8 @@ firebullet.txt
 1	2096	368
 1	2112	384
 
-
+#item EndGame
+500	2688	320
 
 # PIPE
 300	352	352	16	48	2	11000	12000	13000	14000	0
