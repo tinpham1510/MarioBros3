@@ -47,7 +47,7 @@
 #define FirePlant_HEIGHT_OFFSET	46
 
 #define Fire_GreenPlant_HEIGHT_OFFSET	30
-#define FirePlant_MOVING_SPEED_Y	0.01;
+#define FirePlant_MOVING_SPEED_Y	0.01f
 class CFirePlant : public CGameObject
 {
 protected:
@@ -84,7 +84,6 @@ protected:
 
 	void CreateBullet()
 	{
-		float BulletX, BulletY;
 		if (!fb->isFire)
 		{
 			if (nx > 0)

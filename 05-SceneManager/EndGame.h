@@ -25,7 +25,7 @@
 #define ENDGAME_ITEM_STATE_TEXT_DISPLAY	4
 
 #define ID_ANI_STAR	17000
-#define ID_ANI_MUSHROOM	17001
+#define ID_ANI_ITEM_MUSHROOM	17001
 #define ID_ANI_PLANT	17002
 #define ID_ANI_STAR_MOVING	17003
 #define ID_ANI_MUSHROOM_MOVING	17004
@@ -43,6 +43,7 @@ public:
 	float first_y;
 	int typeItem;
 	bool isStar = false , isMush = false, isPlant = false;
+
 	EndGame(float x, float y) : CGameObject(x, y) { SetState(ENDGAME_ITEM_STATE_CHANGE_STAR);  first_y = y; };
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);

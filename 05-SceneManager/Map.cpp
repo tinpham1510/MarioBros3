@@ -76,7 +76,7 @@ void Map::ReadMap()
 void Map::DrawMap()
 {
 	//CSprites* sprites = CSprites::GetInstance();
-
+	
 	float camX, camY;
 	CGame::GetInstance()->GetCamPos(camX, camY);
 	int firstX = (int)(camX / GetMapWidth() * columns);
@@ -84,10 +84,10 @@ void Map::DrawMap()
 	int lastY = firstY + 22 > rows ? rows : firstY + 22;
 	int lastX = firstX + 22 > columns ? columns : firstX + 22;
 
-	for (UINT i = firstY; i < lastY ; i++)
-		for (UINT j = firstX; j < lastX; j++)
+	for (int i = firstY; i < lastY ; i++)
+		for (int j = firstX; j < lastX; j++)
 		{
-			float x, y;
+			int x, y;
 			x = FrameHeight * j;
 			if (id != 30)
 			{

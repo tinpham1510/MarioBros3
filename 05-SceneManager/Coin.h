@@ -15,7 +15,7 @@
 #define COIN_STATE_DISAPPEAR 200
 
 #define TIME_COIN_APPEAR 1000
-#define COIN_BOUNCING	0.02
+#define COIN_BOUNCING	0.02f
 #define MAX_Y	45
 class CCoin : public Item {
 public:

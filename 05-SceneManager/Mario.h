@@ -221,13 +221,6 @@ class CMario : public CGameObject
 	int untouchable; 
 	bool isKicking;
 	ULONGLONG untouchable_start;
-	ULONGLONG timeKick;
-	ULONGLONG timeStack;
-	ULONGLONG timeFalling;
-	ULONGLONG timeFlying;
-	ULONGLONG timeAttacking;
-	ULONGLONG timeSwitch;
-	ULONGLONG timeEnd;
 	
 	
 	void OnCollisionWithGoomba(LPCOLLISIONEVENT e);
@@ -262,7 +255,15 @@ public:
 	FireBullet* fire;
 	BOOLEAN isOnPlatform;
 	bool isHoldKoopas;
-	static CMario* _instance;
+
+	ULONGLONG timeKick;
+	ULONGLONG timeStack;
+	ULONGLONG timeFalling;
+	ULONGLONG timeFlying;
+	ULONGLONG timeAttacking;
+	ULONGLONG timeSwitch;
+	ULONGLONG timeEnd;
+
 	static CMario* GetInstance();
 	static void SetInstance(CMario* p);
 	CMario(float x, float y) : CGameObject(x, y)

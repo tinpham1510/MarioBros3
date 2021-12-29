@@ -2,6 +2,8 @@
 #include "EndGame.h"
 #include "Mario.h"
 
+
+
 void EndGame::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
 	if (state != ENDGAME_ITEM_STATE_TEXT_DISPLAY)
@@ -80,7 +82,7 @@ void EndGame::Render()
 	}
 	else if (state == ENDGAME_ITEM_STATE_CHANGE_MUSHROOM)
 	{
-		animations->Get(ID_ANI_MUSHROOM)->Render(x, y);
+		animations->Get(ID_ANI_ITEM_MUSHROOM)->Render(x, y);
 	}
 	else
 		animations->Get(ID_ANI_PLANT)->Render(x, y);

@@ -19,7 +19,6 @@
 #include "Pbutton.h"
 #include "Leaf.h"
 #include "HUD.h"
-#include "EndGame.h"
 
 
 
@@ -157,6 +156,9 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			SetState(MARIO_STATE_WALKING_RIGHT);
 		}
 	}
+
+
+
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
 

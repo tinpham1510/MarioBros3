@@ -12,6 +12,8 @@ fireplant.txt
 pipe.txt
 hud.txt
 item.txt
+firebullet.txt
+endgame.txt
 #
 
 [MAP]
