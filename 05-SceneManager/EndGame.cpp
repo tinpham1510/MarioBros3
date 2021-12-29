@@ -4,10 +4,20 @@
 
 void EndGame::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-	left = x - ENDGAME_PANEL_BBOX_WIDTH/ 2;
-	right = left + ENDGAME_PANEL_BBOX_WIDTH;
-	top = y - ENDGAME_PANEL_BBOX_HEIGHT / 2;
-	bottom = top + ENDGAME_PANEL_BBOX_HEIGHT;
+	if (state != ENDGAME_ITEM_STATE_TEXT_DISPLAY)
+	{
+		left = x - ENDGAME_PANEL_BBOX_WIDTH / 2;
+		right = left + ENDGAME_PANEL_BBOX_WIDTH;
+		top = y - ENDGAME_PANEL_BBOX_HEIGHT / 2;
+		bottom = top + ENDGAME_PANEL_BBOX_HEIGHT;
+	}
+	else
+	{
+		left = x - ENDGAME_TEXT_BBOX_WIDTH / 2;
+		right = left + ENDGAME_TEXT_BBOX_WIDTH;
+		top = y - ENDGAME_TEXT_BBOX_HEIGHT / 2;
+		bottom = top + ENDGAME_TEXT_BBOX_HEIGHT;
+	}
 }
 
 
@@ -38,6 +48,23 @@ void EndGame::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		{
 			SetState(ENDGAME_ITEM_STATE_CHANGE_STAR);
 		}
+	}
+
+	if (state == ENDGAME_ITEM_STATE_MOVING_UP)
+	{
+		if (GetTickCount64() - timeShow > TIME_CHANGE_TEXT)
+		{
+			SetState(ENDGAME_ITEM_STATE_TEXT_DISPLAY);
+		}
+	}
+
+	if (state == ENDGAME_ITEM_STATE_TEXT_DISPLAY)
+	{
+		if (first_y < y + ENDGAME_TEXT_BBOX_HEIGHT)
+		{
+			vy = 0;
+		}
+
 	}
 	CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
@@ -71,6 +98,20 @@ void EndGame::Render()
 		else
 			animations->Get(ID_ANI_PLANT_MOVING)->Render(x, y);
 	}
+
+	if (state == ENDGAME_ITEM_STATE_TEXT_DISPLAY)
+	{
+		if (isStar)
+		{
+			animations->Get(ID_ANI_TEXT_STAR)->Render(x, y);
+		}
+		else if (isMush)
+		{
+			animations->Get(ID_ANI_TEXT_MUSHROOM)->Render(x, y);
+		}
+		else
+			animations->Get(ID_ANI_TEXT_PLANT)->Render(x, y);
+	}
 	//RenderBoundingBox();
 }
 
@@ -103,6 +144,11 @@ void EndGame::SetState(int state)
 		else
 			isPlant = true;
 		vy = -ENDGAME_ITEM_MOVINGVY;
+		timeShow = GetTickCount64();
+		break;
+	case ENDGAME_ITEM_STATE_TEXT_DISPLAY:
+		vy = ENDGAME_TEXT_MOVING;
+		break;
 	default:
 		break;
 	}

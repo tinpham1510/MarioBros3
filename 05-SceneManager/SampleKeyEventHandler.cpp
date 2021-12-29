@@ -83,12 +83,12 @@ void CSampleKeyHandler::OnKeyUp(int KeyCode)
 	}
 }
 
-void CSampleKeyHandler::KeyState(BYTE *states)
+void CSampleKeyHandler::KeyState(BYTE* states)
 {
 	LPGAME game = CGame::GetInstance();
 	CMario* mario = (CMario*)((LPPLAYSCENE)CGame::GetInstance()->GetCurrentScene())->GetPlayer();
 
-	if (!mario->isChangingScene)
+	if (!mario->isChangingScene && !mario->isEnd)
 	{
 		if (game->IsKeyDown(DIK_RIGHT))
 		{

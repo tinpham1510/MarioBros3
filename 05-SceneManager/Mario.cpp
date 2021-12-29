@@ -150,6 +150,13 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		}
 	}
 
+	if (isEnd)
+	{
+		if (GetTickCount64() - timeEnd > MARIO_TIME_END)
+		{
+			SetState(MARIO_STATE_WALKING_RIGHT);
+		}
+	}
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
 
@@ -624,6 +631,7 @@ void CMario::OnCollisionWithEndGameItem(LPCOLLISIONEVENT e)
 	{
 		item->SetState(ENDGAME_ITEM_STATE_MOVING_UP);
 		vy = 0;
+		SetState(MARIO_STATE_ENDGAME);
 	}
 }
 //
@@ -1163,6 +1171,10 @@ void CMario::SetState(int state)
 		isHoldKoopas = false;
 		koopas->nx = nx;
 		koopas->SetState(KOOPAS_STATE_DIE);
+		break;
+	case MARIO_STATE_ENDGAME:
+		isEnd = true;
+		timeEnd = GetTickCount64();
 		break;
 	}
 

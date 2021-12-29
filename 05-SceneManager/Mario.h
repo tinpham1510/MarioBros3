@@ -39,6 +39,8 @@
 
 #define MARIO_TIME_SWITCH_SCENE 1000
 
+#define MARIO_TIME_END	3000
+
 #define MARIO_MAX_POWER	7
 
 
@@ -67,6 +69,7 @@
 #define MARIO_STATE_FALLDOWN_PIPE	1400
 #define MARIO_STATE_JUMPING_PIPE	1500
 #define MARIO_STATE_DROP_KOOPAS_SHELL	1600
+#define MARIO_STATE_ENDGAME	1700
 
 
 #pragma region ANIMATION_ID
@@ -224,6 +227,7 @@ class CMario : public CGameObject
 	ULONGLONG timeFlying;
 	ULONGLONG timeAttacking;
 	ULONGLONG timeSwitch;
+	ULONGLONG timeEnd;
 	
 	
 	void OnCollisionWithGoomba(LPCOLLISIONEVENT e);
@@ -253,6 +257,7 @@ public:
 	int powerStack;
 	bool isPressed;
 	bool isChangingScene;
+	bool isEnd;
 	CTail* tail;
 	FireBullet* fire;
 	BOOLEAN isOnPlatform;
@@ -263,7 +268,7 @@ public:
 	CMario(float x, float y) : CGameObject(x, y)
 	{
 		isSitting = false;
-		isKicking =  isPressed = isChangingScene = isAttacking = isFlying = isHoldKoopas = false;
+		isKicking =  isPressed = isChangingScene = isAttacking = isFlying = isHoldKoopas = isEnd = false;
 		maxVx = 0.0f;
 		ax = 0.0f;
 		ay = MARIO_GRAVITY; 
@@ -273,7 +278,7 @@ public:
 		isOnPlatform = false;
 		coin = 0;
 		type = 0;
-		timeStack = timeAttacking = timeFlying = timeFalling = powerStack = 0;
+		timeStack = timeAttacking = timeFlying = timeFalling = powerStack = timeEnd = 0;
 		tail = NULL;
 		fire = new FireBullet(x + 30, y);
 	}
