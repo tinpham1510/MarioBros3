@@ -41,7 +41,7 @@ void Camera::SetPosition(float& cam_x, float& cam_y)
 
 	if (Cam_x >= mapwidth - Width - ScreenH)
 		Cam_x = mapwidth - Width - ScreenH;
-	if (Cam_y >= ScreenY)
+	if (Cam_y > ScreenY)
 	{
 		Cam_y = float(mapheight - Height + ScreenH);
 	}

@@ -17,6 +17,9 @@
 #define SCREEN_W_PLUS	10
 #define SCREEN_PLUS	12
 
+#define RANGE_BETWEEN	66
+#define RANGE_HEIGHT 7
+
 #define ITEM_BBOX_WIDTH	24
 class HUD: public CGameObject
 {
@@ -26,7 +29,6 @@ public:
 public:
 	int stack;
 	int time;
-	EndGame* eg;
 	HUD() {
 		time = 300;
 		stack = 0;

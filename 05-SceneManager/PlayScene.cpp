@@ -233,6 +233,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 	case OBJECT_TYPE_ITEM_ENDGAME:
 	{
 		obj = new EndGame(x, y);
+		EndGame::SetInstance((EndGame*)obj);
 		break;
 	}
 	case OBJECT_TYPE_PLATFORM:

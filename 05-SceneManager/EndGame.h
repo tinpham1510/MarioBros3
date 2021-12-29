@@ -35,7 +35,10 @@
 #define ID_ANI_TEXT_PLANT	17008
 class EndGame: public CGameObject
 {
+	static EndGame* __instance;
 public:
+	static EndGame* GetInstance();
+	static void SetInstance(EndGame* p);
 	ULONGLONG timeChangeM;
 	ULONGLONG timeChangeP;
 	ULONGLONG timeChangeS;
@@ -43,7 +46,6 @@ public:
 	float first_y;
 	int typeItem;
 	bool isStar = false , isMush = false, isPlant = false;
-
 	EndGame(float x, float y) : CGameObject(x, y) { SetState(ENDGAME_ITEM_STATE_CHANGE_STAR);  first_y = y; };
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
@@ -52,5 +54,7 @@ public:
 	virtual int IsCollidable() { return 1; };
 	virtual int IsBlocking() { return 0; }
 	virtual void SetState(int state);
+
+	float getX() { return x; }
 };
 

@@ -11,6 +11,8 @@ Map::Map(int ID, LPCWSTR Filepath, int Rows, int Cols, int Tiles, int TileColumn
 	this->TileSetWidth = Tiles;
 	this->TileSetHeight = TileColumn;
 
+	Mapheight = rows * FrameHeight;
+	Mapwidth = columns * FrameWidth;
 	Load();
 }
 void Map::Load() {
@@ -79,22 +81,21 @@ void Map::DrawMap()
 	
 	float camX, camY;
 	CGame::GetInstance()->GetCamPos(camX, camY);
-	int firstX = (int)(camX / GetMapWidth() * columns);
-	int firstY = (int)(camY / GetMapHeight() * rows );
-	int lastY = firstY + 22 > rows ? rows : firstY + 22;
-	int lastX = firstX + 22 > columns ? columns : firstX + 22;
+	int firstX = (int)(camX /  Mapwidth * columns);
+	int firstY = (int)(camY / Mapheight * rows + 1);
+	int lastY = firstY + 21 > rows ? rows : firstY + 21;
+	int lastX = firstX + 21 > columns ? columns : firstX + 21;
 
 	for (int i = firstY; i < lastY ; i++)
 		for (int j = firstX; j < lastX; j++)
 		{
-			int x, y;
+			float x, y;
 			x = FrameHeight * j;
 			if (id != 30)
 			{
-				y = FrameWidth * i;
+				y = FrameWidth * i + 16;
 			}
-			else
-				y = FrameWidth * i - 16;
+			y = FrameWidth * i - 16;
 			CSprites::GetInstance()->Get(TileMapID[i][j])->Draw(x, y);
 		}
 }

@@ -23,6 +23,8 @@ public:
 	int TileSetHeight;
 	int TileMapID[MAX][MAX];
 	int row = 0;
+	int Mapheight;
+	int Mapwidth;
 
 public:
 	Map(int ID, LPCWSTR Filepath, int Rows, int Cols, int Tiles, int TileColumn);

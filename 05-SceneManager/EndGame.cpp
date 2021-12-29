@@ -1,8 +1,18 @@
 #include "EndGame.h"
-#include "EndGame.h"
-#include "Mario.h"
 
 
+EndGame* EndGame::__instance = NULL;
+
+EndGame* EndGame::GetInstance()
+{
+	if (__instance == NULL) __instance = new EndGame(0, 0);
+	return __instance;
+}
+
+void EndGame::SetInstance(EndGame* p)
+{
+	__instance = p;
+}
 
 void EndGame::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
