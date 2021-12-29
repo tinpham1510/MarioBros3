@@ -23,5 +23,6 @@ public:
 	void OnCollisionWithKoopas(LPGAMEOBJECT& e);
 	void OnCollisionWithQB(LPGAMEOBJECT& e);
 	void OnCollisionWithB(LPGAMEOBJECT& e);
+	void OnCollisionWithFirePlant(LPGAMEOBJECT& e);
 	void SetDirect(int n) { this->nx = n; }
 };

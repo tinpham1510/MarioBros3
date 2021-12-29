@@ -310,6 +310,21 @@ public:
 
 	void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 
-	
+	void CollisionMario()
+	{
+		if (untouchable == 0)
+		{
+			if (level > MARIO_LEVEL_SMALL)
+			{
+				level--;
+				StartUntouchable();
+			}
+			else
+			{
+				DebugOut(L">>> Mario DIE >>> \n");
+				SetState(MARIO_STATE_DIE);
+			}
+		}
+	}
 	
 };

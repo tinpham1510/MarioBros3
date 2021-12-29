@@ -5,6 +5,7 @@
 #include "Koopas.h"
 #include "Mario.h"
 #include "Brick.h"
+#include "FirePlant.h"
 #include "debug.h"
 
 void CTail::GetBoundingBox(float& left, float& top, float& right, float& bottom)
@@ -87,6 +88,13 @@ void CTail::OnCollisionWithB(LPGAMEOBJECT& e)
 
 
 }
+
+void CTail::OnCollisionWithFirePlant(LPGAMEOBJECT& e)
+{
+	CFirePlant* fp = dynamic_cast <CFirePlant*>(e);
+	fp->Delete();
+}
+
 void CTail::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 	for (int i = 0; i < coObjects->size(); i++)
@@ -103,6 +111,8 @@ void CTail::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 				OnCollisionWithKoopas(coObjects->at(i));
 			else if (dynamic_cast<CBrick*>(coObjects->at(i)))
 				OnCollisionWithB(coObjects->at(i));
+			else if (dynamic_cast<CFirePlant*>(coObjects->at(i)))
+				OnCollisionWithFirePlant(coObjects->at(i));
 		}
 	}
 	//CGameObject::Update(dt, coObjects);

@@ -149,7 +149,6 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		}
 	}
 
-
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 }
 
@@ -214,6 +213,7 @@ void CMario::OnCollisionWith(LPCOLLISIONEVENT e)
 	else if (dynamic_cast<Leaf*>(e->obj))
 		OnCollisionWithLeaf(e);
 }
+
 
 void CMario::OnCollisionWithLeaf(LPCOLLISIONEVENT e)
 {
@@ -538,16 +538,7 @@ void CMario::OnCollisionWithKoopasFly(LPCOLLISIONEVENT e) {
 		{
 			if (kpF->GetState() != KOOPASFLY_STATE_SHELL)
 			{
-				if (level > MARIO_LEVEL_SMALL)
-				{
-					level--;
-					StartUntouchable();
-				}
-				else
-				{
-					DebugOut(L">>> Mario DIE >>> \n");
-					SetState(MARIO_STATE_DIE);
-				}
+				CollisionMario();
 			}
 		}
 	}
@@ -616,18 +607,10 @@ void CMario::OnCollisionWithRedGoomba(LPCOLLISIONEVENT e) {
 void CMario::OnCollisionWithPlant(LPCOLLISIONEVENT e)
 {
 	CFirePlant* plant = dynamic_cast<CFirePlant*>(e->obj);
+
 	if (untouchable == 0)
 	{
-			if (level > MARIO_LEVEL_SMALL)
-			{
-				level--;
-				StartUntouchable();
-			}
-			else
-			{
-				DebugOut(L">>> Mario DIE >>> \n");
-				SetState(MARIO_STATE_DIE);
-			}
+		CollisionMario();
 	}
 }
 //
