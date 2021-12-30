@@ -90,12 +90,12 @@ void Map::DrawMap()
 		for (int j = firstX; j < lastX; j++)
 		{
 			float x, y;
-			x = FrameHeight * j;
+			x = FrameHeight * (float)j;
 			if (id != 30)
 			{
-				y = FrameWidth * i + 16;
+				y = FrameWidth * (float)i + 16;
 			}
-			y = FrameWidth * i - 16;
+			y = FrameWidth * (float)i - 16;
 			CSprites::GetInstance()->Get(TileMapID[i][j])->Draw(x, y);
 		}
 }

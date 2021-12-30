@@ -97,7 +97,7 @@ void CPlayScene::_ParseSection_ANIMATIONS(string line)
 	for (int i = 1; i < tokens.size(); i += 2)	// why i+=2 ?  sprite_id | frame_time  
 	{
 		int sprite_id = atoi(tokens[i].c_str());
-		int frame_time = atoi(tokens[i+1].c_str());
+		int frame_time = atoi(tokens[static_cast<__int64>(i)+1].c_str());
 		ani->Add(sprite_id, frame_time);
 	}
 
@@ -280,8 +280,8 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		float r = (float)atof(tokens[3].c_str());
 		float b = (float)atof(tokens[4].c_str());
 		int scene_id = atoi(tokens[5].c_str());
-		int X = (int)atoi(tokens[6].c_str());
-		int Y = (int)atoi(tokens[7].c_str());
+		float X = (float)atoi(tokens[6].c_str());
+		float Y = (float)atoi(tokens[7].c_str());
 		obj = new CPortal(x, y, r, b, scene_id, X, Y);
 	}
 	break;

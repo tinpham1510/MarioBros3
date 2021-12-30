@@ -281,7 +281,8 @@ public:
 		isOnPlatform = false;
 		coin = 0;
 		type = 0;
-		timeStack = timeAttacking = timeFlying = timeFalling = powerStack = timeEnd = timeKick = timeSwitch = ULONGLONG(0);
+		timeStack = timeAttacking = timeFlying = timeFalling = timeEnd = timeKick = timeSwitch = ULONGLONG(0);
+		powerStack = 0;
 		tail = NULL;
 		fire = new FireBullet(x, y);
 	}
