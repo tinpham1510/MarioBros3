@@ -24,7 +24,7 @@ void Camera::SetPosition(float& cam_x, float& cam_y)
 	Cam_x = cam_x;
 	Cam_y = cam_y;
 	Cam_y -= (float)game->GetBackBufferHeight() / 2;
-	float ScreenY = mapheight - Height + ScreenH;
+	float ScreenY = mapheight - Height - ScreenH;
 
 	if (cam_y > ScreenY) {
 		Cam_y = cam_y;

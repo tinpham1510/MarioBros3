@@ -5,7 +5,7 @@
 #include "Animations.h"
 
 #define TAIL_BBOX_WIDTH 8
-#define TAIL_BBOX_HEIGHT 8
+#define TAIL_BBOX_HEIGHT 5
 
 class CTail : public CGameObject {
 public:

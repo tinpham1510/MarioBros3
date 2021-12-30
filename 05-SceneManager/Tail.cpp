@@ -77,8 +77,6 @@ void CTail::OnCollisionWithQB(LPGAMEOBJECT& e)
 {
 	CQuestionBrick* qb = dynamic_cast<CQuestionBrick*>(e);
 	qb->SetState(QUESTIONBRICK_STATE_COLISION);
-	
-	
 }
 
 void CTail::OnCollisionWithB(LPGAMEOBJECT& e)
@@ -121,5 +119,5 @@ void CTail::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 void CTail::Render()
 {
-	//RenderBoundingBox();
+	RenderBoundingBox();
 }

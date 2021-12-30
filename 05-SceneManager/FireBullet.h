@@ -17,11 +17,10 @@
 #define TIME_DELETE_BULLET	2000
 class FireBullet : public CGameObject
 {
-protected:
-	ULONGLONG timeDelete;
 public:
 	bool isFire = false;
-	FireBullet(float x, float y) : CGameObject(x, y) {};
+	ULONGLONG timeDelete;
+	FireBullet(float x, float y) : CGameObject(x, y) { timeDelete = ULONGLONG(0); };
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	virtual void Render();

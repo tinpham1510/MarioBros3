@@ -352,7 +352,7 @@ void CMario::OnCollisionWithQB(LPCOLLISIONEVENT e) {
 		}
 		
 	}
-	else if (isAttacking)
+	else if (isAttacking && e->nx !=0)
 	{
 		if (brick->GetState() != QUESTIONBRICK_STATE_EMP)
 		{

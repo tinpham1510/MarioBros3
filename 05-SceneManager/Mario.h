@@ -281,9 +281,9 @@ public:
 		isOnPlatform = false;
 		coin = 0;
 		type = 0;
-		timeStack = timeAttacking = timeFlying = timeFalling = powerStack = timeEnd = timeKick = timeSwitch = 0;
+		powerStack = 0;
 		tail = NULL;
-		fire = new FireBullet(x + 30, y);
+		fire = new FireBullet(x, y);
 	}
 	void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);
 	void Render();
