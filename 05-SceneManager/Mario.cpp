@@ -46,7 +46,12 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	vy += ay * dt;
 	vx += ax * dt;
 	
-	if (abs(vx) > abs(maxVx)) vx = maxVx;
+	if (state != MARIO_STATE_IDLE)
+		vx += ax * dt;
+
+	if (abs(vx) > abs(maxVx)) {
+		vx = maxVx;
+	}
 
 	if (abs(ax) == MARIO_ACCEL_RUN_X)
 	{ 
@@ -898,7 +903,10 @@ int CMario::GetAniIDRacoon() {
 					}
 					else if (vx > 0)
 					{
-						if (ax < 0)
+						if (state == MARIO_STATE_IDLE) {
+							aniId = ID_ANI_MARIO_RACOON_WALKING_RIGHT;
+						}
+						else if (ax < 0)
 							aniId = ID_ANI_MARIO_RACOON_BRACE_RIGHT;
 						else if (ax == MARIO_ACCEL_RUN_X)
 						{
@@ -916,7 +924,10 @@ int CMario::GetAniIDRacoon() {
 					}
 					else // vx < 0
 					{
-						if (ax > 0)
+						if (state == MARIO_STATE_IDLE) {
+							aniId = ID_ANI_MARIO_RACOON_WALKING_LEFT;
+						}
+						else if (ax > 0)
 							aniId = ID_ANI_MARIO_RACOON_BRACE_LEFT;
 						else if (ax == -MARIO_ACCEL_RUN_X)
 						{
@@ -990,7 +1001,7 @@ void CMario::Render()
 	animations->Get(aniId)->Render(x, y);
 	if (level == MARIO_LEVEL_RACOON)
 	{
-		//tail->Render();
+		tail->Render();
 	}
 	//RenderBoundingBox();
 
@@ -1067,8 +1078,28 @@ void CMario::SetState(int state)
 		break;
 
 	case MARIO_STATE_IDLE:
-		ax = 0.0f;
-		vx = 0.0f;
+		if (vx != 0)
+		{
+			if (nx == 1) {
+				vx += -ax * MARIO_ACCEL_SLOWING_DOWN_X_PARAM;
+				maxVx += -ax * MARIO_ACCEL_SLOWING_DOWN_X_PARAM;
+
+				if (vx < 0 || maxVx < 0) {
+					vx = 0;
+					maxVx = 0;
+				}
+			}
+			else {
+				vx -= ax * MARIO_ACCEL_SLOWING_DOWN_X_PARAM;
+				maxVx -= ax * MARIO_ACCEL_SLOWING_DOWN_X_PARAM;
+
+				if (vx > 0 || maxVx > 0) {
+					vx = 0;
+					maxVx = 0;
+				}
+			}
+		}
+		else ax = 0;
 		break;
 
 	case MARIO_STATE_DIE:

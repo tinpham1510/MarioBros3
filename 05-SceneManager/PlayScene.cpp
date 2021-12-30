@@ -148,7 +148,7 @@ void CPlayScene::_ParseSection_OBJECTS(string line)
 		obj = new CMario(x, y);
 		if (CGame::GetInstance()->nextX != 0 && CGame::GetInstance()->nextY != 0)
 		{
-			obj->SetPosition(CGame::GetInstance()->nextX, CGame::GetInstance()->nextY);
+			obj->SetPosition((float)CGame::GetInstance()->nextX, (float)CGame::GetInstance()->nextY);
 		}
 		player = (CMario*)obj;
 		CMario::SetInstance((CMario*)obj);
