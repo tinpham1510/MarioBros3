@@ -15,6 +15,8 @@
 
 #define BACKGROUND_TIME_CHANGE	500
 
+#define BACKGROUND_INTRO_TIME 1700
+
 #define BACKGROUND_OFFSET	20
 #define BACKGROUND_MOVING_VY	0.2f
 class IntroBG: public CGameObject

@@ -120,6 +120,7 @@ void CFirePlant::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		}
 		else if (state == FirePlant_STATE_STOP_INPIPE)
 		{
+			AttackZone();
 			if (GetTickCount64() - timeWarp > Fire_GreenPlant_TIME_INPIPE)
 			{
 				SetState(FirePlant_STATE_APPEAR);
