@@ -104,21 +104,15 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		}
 	}
 
-	if (isHoldKoopas)
-	{
-		if (nx >= 0)
-		{
-			koopas->SetPosition(x + MARIO_RACOON_BBOX_WIDTH /2 + KOOPAS_BBOX_WIDTH/2 + RANGE_BETWEEN_OBJECT , y);
-		}
-		else
-			koopas->SetPosition(x - MARIO_RACOON_BBOX_WIDTH /2 - KOOPAS_BBOX_WIDTH/2 - RANGE_BETWEEN_OBJECT, y);
-		
-		if (koopas->GetState() == KOOPAS_STATE_WALKING)
-		{
-			SetState(MARIO_STATE_RELEASE_HOLDING_A);
-		}
-		
 
+	if (isAttacking)
+	{
+		tail->SetPosition((nx < 0) ? (x - MARIO_BIG_BBOX_WIDTH / 2 - TAIL_BBOX_WIDTH / 2) : (x + MARIO_BIG_BBOX_WIDTH / 2 + TAIL_BBOX_WIDTH / 2), y + 6);
+		tail->SetDirect(nx);
+		if (GetTickCount64() - timeAttacking > MARIO_TIME_ATTACKING)
+		{
+			isAttacking = false;
+		}
 	}
 
 	// reset untouchable timer if untouchable time has passed
@@ -128,18 +122,6 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		untouchable = 0;
 	}
 	isOnPlatform = false;
-	/*tail->SetPosition((nx < 0) ?(x + MARIO_BIG_BBOX_WIDTH / 2 + TAIL_BBOX_WIDTH / 2) - 2 : (x - MARIO_BIG_BBOX_WIDTH / 2 - TAIL_BBOX_WIDTH / 2) + 2, y + 6);
-	tail->Update(dt, coObjects);*/
-
-	if (isAttacking)
-	{
-		tail->SetPosition((nx < 0) ? (x - MARIO_BIG_BBOX_WIDTH / 2 - TAIL_BBOX_WIDTH / 2) : (x + MARIO_BIG_BBOX_WIDTH / 2 + TAIL_BBOX_WIDTH / 2) , y + 6);
-		tail->SetDirect(nx);
-		if (GetTickCount64() - timeAttacking > MARIO_TIME_ATTACKING)
-		{
-			isAttacking = false;
-		}
-	}
 
 	if (isPressed)
 	{
@@ -162,9 +144,22 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 		}
 	}
 
-
-
 	CCollision::GetInstance()->Process(this, dt, coObjects);
+	if (isHoldKoopas)
+	{
+		if (nx >= 0)
+		{
+			koopas->SetPosition(x + MARIO_RACOON_BBOX_WIDTH / 2 + KOOPAS_BBOX_WIDTH / 2 + RANGE_BETWEEN_OBJECT, y);
+		}
+		else
+			koopas->SetPosition(x - MARIO_RACOON_BBOX_WIDTH / 2 - KOOPAS_BBOX_WIDTH / 2 - RANGE_BETWEEN_OBJECT, y);
+
+		if (koopas->GetState() == KOOPAS_STATE_WALKING)
+		{
+			SetState(MARIO_STATE_RELEASE_HOLDING_A);
+		}
+
+	}
 }
 
 void CMario::OnNoCollision(DWORD dt)

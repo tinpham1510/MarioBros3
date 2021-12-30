@@ -232,7 +232,7 @@ void CKoopas::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			isDeleted = true;
 		}
 	}
-	CGameObject::Update(dt, coObjects);
+	//CGameObject::Update(dt, coObjects);
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 	
 }
