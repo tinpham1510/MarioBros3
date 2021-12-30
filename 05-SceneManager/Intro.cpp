@@ -74,7 +74,7 @@ void IntroScene::_ParseSection_ANIMATIONS(string line)
 	for (int i = 1; i < tokens.size(); i += 2)	// why i+=2 ?  sprite_id | frame_time  
 	{
 		int sprite_id = atoi(tokens[i].c_str());
-		int frame_time = atoi(tokens[i + 1].c_str());
+		int frame_time = atoi(tokens[static_cast<__int64>(i) + 1].c_str());
 		ani->Add(sprite_id, frame_time);
 	}
 
@@ -157,35 +157,9 @@ void IntroScene::Load()
 	//introbackground
 	introbackground->SetPosition((float)CGame::GetInstance()->GetBackBufferWidth() / 2, (float)-CGame::GetInstance()->GetBackBufferHeight());
 	objects.push_back(introbackground);
-	/*
-	NUMBER3
-	num3 = new Number3(0, 0);
-	num3->SetPosition(CGame::GetInstance()->GetBackBufferWidth() / 2, -CGame::GetInstance()->GetBackBufferHeight());
-	objects.push_back(num3);
-	introoption
-	option->SetPosition(CGame::GetInstance()->GetBackBufferWidth() / 2, -CGame::GetInstance()->GetBackBufferHeight());
+	//options
+	option->SetPosition((float)CGame::GetInstance()->GetBackBufferWidth() / 2, (float)-CGame::GetInstance()->GetBackBufferHeight());
 	objects.push_back(option);
-	platform
-	brick->SetPosition(CGame::GetInstance()->GetBackBufferWidth() / 2, BRICKY_INTROSCENE);
-	objects.push_back(brick);
-	mario+tail
-	redMario = new CMario(0, 0);
-	redMario->SetPosition(TEN, 0);
-	objects.push_back(redMario);
-	Tail* obj1 = new Tail(TEN + KOOPAS_WIDTH, 0);
-	obj1->SetPosition(TEN - WIDTH, 0);
-	objects.push_back(obj1);
-	CMario* a = dynamic_cast<CMario*>(redMario);
-	a->tail = obj1;
-	green mario
-	greenMario = new GreenMario(0, 0);
-	greenMario->SetPosition(CGame::GetInstance()->GetBackBufferWidth(), 0);
-	objects.push_back(greenMario);
-	Tail* obj2 = new Tail(CGame::GetInstance()->GetBackBufferWidth() + KOOPAS_WIDTH, 0);
-	obj2->SetPosition(CGame::GetInstance()->GetBackBufferWidth() - WIDTH, 0);
-	objects.push_back(obj2);
-	GreenMario* b = dynamic_cast<GreenMario*>(greenMario);
-	b->tail = obj2;*/
 	//curtain
 	curtain->SetPosition((float)CGame::GetInstance()->GetBackBufferWidth() / 2, (float)CGame::GetInstance()->GetBackBufferHeight() / 2 - TEN * 2);
 	objects.push_back(curtain);
@@ -275,8 +249,26 @@ void IntroScene::ScriptIntro()
 		}
 	}
 
+	if (isDoneSeq2 && !isDoneSeq3)
+	{
+		if (GetTickCount64() - SequenceTime >= 3000)
+		{
+			if (option->GetState() == 0)
+			{
+				SequenceTime = (DWORD)GetTickCount64();
+				option->SetState(OPTION_STATE_MOVING);
+				isDoneSeq3 = true;
+			}
+		}
+	}
 
-
+	if (isDoneSeq3 && !isDoneSeq4)
+	{
+		if (GetTickCount64() - SequenceTime >= 5000)
+		{
+			CGame::GetInstance()->InitiateSwitchScene(1);
+		}
+	}
 }
 
 /*

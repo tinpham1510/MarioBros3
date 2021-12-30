@@ -54,13 +54,13 @@ class CGame
 
 
 	unordered_map<int, LPSCENE> scenes;
-	int current_scene;
 	int next_scene = -1;
 
 	void _ParseSection_SETTINGS(string line);
 	void _ParseSection_SCENES(string line);
 
 public:
+	int current_scene;
 	float nextX = 0.0f, nextY = 0.0f;
 	// Init DirectX, Sprite Handler
 	void Init(HWND hWnd, HINSTANCE hInstance);
