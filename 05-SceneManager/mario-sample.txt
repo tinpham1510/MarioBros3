@@ -32,3 +32,4 @@ height	240
 70	textures\endgame.png
 80	textures\intro1.png
 81	textures\title.png
+82	textures\textIntro.png

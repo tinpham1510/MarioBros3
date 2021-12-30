@@ -37,6 +37,12 @@
     <Filter Include="Hud">
       <UniqueIdentifier>{0184da44-1d43-428d-843d-075c330c3343}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Intro">
+      <UniqueIdentifier>{fabf9788-51f1-4149-b366-70284b40b91c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{9fdb63aa-5788-4485-94a8-fed20dd56911}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -73,9 +79,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Utils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Mario.cpp">
@@ -151,22 +154,28 @@
       <Filter>Hud</Filter>
     </ClCompile>
     <ClCompile Include="FireBullet.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="EndGame.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Camera</Filter>
     </ClCompile>
     <ClCompile Include="Intro.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Intro</Filter>
     </ClCompile>
     <ClCompile Include="Curtain.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Intro</Filter>
     </ClCompile>
     <ClCompile Include="IntroBG.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Intro</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroNumber.cpp">
+      <Filter>Intro</Filter>
     </ClCompile>
     <ClCompile Include="IntroOption.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Intro</Filter>
+    </ClCompile>
+    <ClCompile Include="EndGame.cpp">
+      <Filter>Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -207,9 +216,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Utils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Mario.h">
@@ -294,22 +300,28 @@
       <Filter>Hud</Filter>
     </ClInclude>
     <ClInclude Include="FireBullet.h">
-      <Filter>Header Files</Filter>
+      <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="EndGame.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Camera.h">
+      <Filter>Camera</Filter>
     </ClInclude>
     <ClInclude Include="Intro.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Curtain.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="IntroBG.h">
-      <Filter>Header Files</Filter>
+      <Filter>Intro</Filter>
     </ClInclude>
     <ClInclude Include="IntroOption.h">
-      <Filter>Header Files</Filter>
+      <Filter>Intro</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroNumber.h">
+      <Filter>Intro</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroBG.h">
+      <Filter>Intro</Filter>
+    </ClInclude>
+    <ClInclude Include="Curtain.h">
+      <Filter>Intro</Filter>
+    </ClInclude>
+    <ClInclude Include="EndGame.h">
+      <Filter>Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -327,10 +339,18 @@
       <Filter>Item</Filter>
     </Text>
     <Text Include="scene-mario.txt" />
-    <Text Include="firebullet.txt" />
     <Text Include="endgame.txt" />
-    <Text Include="intro.txt" />
-    <Text Include="map-intro.txt" />
-    <Text Include="curtain.txt" />
+    <Text Include="curtain.txt">
+      <Filter>Intro</Filter>
+    </Text>
+    <Text Include="intro.txt">
+      <Filter>Intro</Filter>
+    </Text>
+    <Text Include="map-intro.txt">
+      <Filter>Intro</Filter>
+    </Text>
+    <Text Include="firebullet.txt">
+      <Filter>Object</Filter>
+    </Text>
   </ItemGroup>
 </Project>

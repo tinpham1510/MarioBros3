@@ -12,29 +12,26 @@ IntroOption* IntroOption::GetInstance()
 void IntroOption::Render()
 {
 	CAnimations* animations = CAnimations::GetInstance();
-	if (state == OPTION_STATE_MOVING)
+	if (state == OPTION_STATE_KEYUP)
 	{
 		animations->Get(ID_ANI_OPTION)->Render(x, y);
 	}
-	else if (state == OPTION_STATE_CHANGE)
+	else if (state == OPTION_STATE_KEYDOWN)
 	{
 		animations->Get(ID_ANI_OPTION_CHANGE)->Render(x, y);
 	}
+	else
+		animations->Get(ID_ANI_OPTION_IDLE)->Render(x, y);
 }
 void IntroOption::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
-	x += vx * dt;
-	y += vy * dt;
-	if (state == OPTION_STATE_MOVING)
+	if (state == OPTION_STATE_IDLE)
 	{
-		if (y >= (float)CGame::GetInstance()->GetBackBufferHeight() / 2 + OPTION_OFFSET)
+		if (GetTickCount64() - timeChange > OPTION_TIME_CHANGE)
 		{
-			vy = 0;
+			SetState(OPTION_STATE_KEYUP);
 		}
 	}
-
-
-
 }
 void IntroOption::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
@@ -49,13 +46,7 @@ void IntroOption::SetState(int state)
 	switch (state)
 	{
 	case OPTION_STATE_IDLE:
-
-		break;
-	case OPTION_STATE_MOVING:
-		vy = OPTION_MOVING_VY;
 		timeChange = GetTickCount64();
-		break;
-	case OPTION_STATE_CHANGE:
 		break;
 	default:
 		break;

@@ -1,5 +1,5 @@
 #include "IntroBG.h"
-
+#include "IntroNumber.h"
 void IntroBG::Render()
 {
 	CAnimations* animations = CAnimations::GetInstance();
@@ -23,7 +23,7 @@ void IntroBG::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			vy = 0;
 		}
 
-		if (GetTickCount64() - timeChange >= 5000)
+		if (GetTickCount64() - timeChange >= BACKGROUND_INTRO_TIME)
 		{
 			SetState(BACKGROUND_STATE_CHANGE);
 		}

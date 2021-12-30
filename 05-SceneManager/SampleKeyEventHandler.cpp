@@ -18,11 +18,16 @@ void CSampleKeyHandler::OnKeyDown(int KeyCode)
 		switch (KeyCode)
 		{
 		case DIK_DOWN:
-			if (option->GetState() == OPTION_STATE_MOVING) {
-				option->SetState(OPTION_STATE_CHANGE);
+			if (option->GetState() == OPTION_STATE_KEYUP) {
+				option->SetState(OPTION_STATE_KEYDOWN);
 			}
 			break;
-		case DIK_S:
+		case DIK_UP:
+			if (option->GetState() == OPTION_STATE_KEYDOWN) {
+				option->SetState(OPTION_STATE_KEYUP);
+			}
+			break;
+		case DIK_W:
 			CGame::GetInstance()->InitiateSwitchScene(1);
 			break;
 		default:

@@ -3,20 +3,20 @@
 #include "Animations.h"
 #include "GameObject.h"
 
-#define OPTION_BBOX_WIDTH	112
-#define OPTION_BBOX_HEIGHT	24
+#define OPTION_BBOX_WIDTH	126
+#define OPTION_BBOX_HEIGHT	28
 
 #define ID_ANI_OPTION	18003
 #define ID_ANI_OPTION_CHANGE	18004
+#define ID_ANI_OPTION_IDLE	18007
 
 #define OPTION_STATE_IDLE	0
-#define OPTION_STATE_MOVING	1
-#define OPTION_STATE_CHANGE	2
+#define OPTION_STATE_KEYUP	1
+#define OPTION_STATE_KEYDOWN	2
 
-#define OPTION_TIME_CHANGE	500
+#define OPTION_TIME_CHANGE	6000
 
-#define OPTION_OFFSET	48
-#define OPTION_MOVING_VY	0.1f
+#define OPTION_OFFSET	275
 class IntroOption : public CGameObject
 {
 public:

@@ -1,15 +1,16 @@
 #include "Intro.h"
 
 #include "SampleKeyEventHandler.h"
-#define ONE_100	40
-#define TEN	13
-#define BRICKY_INTROSCENE	185
-#define NINE_HUNDRED	900
+#define RANGE_Y	13
+#define TIME_CURTAIN	1000
+#define TIME_BACKGROUND	500
+#define TIME_NUMBER	1700
+#define TIME_OPTION	1500
 IntroScene::IntroScene(int id, LPCWSTR filePath) :
 	CScene(id, filePath)
 {
 	//player = NULL;
-	isDoneSeq1 = isDoneSeq2 = isDoneSeq3 = isDoneSeq4 = isDoneSeq5 = false;
+	isFinish1 = isFinish2 = isFinish3 = isFinish4 = isFinish5 = false;
 	key_handler = new CSampleKeyHandler(this);
 	map = NULL;
 	path = filePath;
@@ -152,16 +153,18 @@ void IntroScene::Load()
 		case SCENE_SECTION_MAPS: _ParseSection_MAP(line); break;
 		}
 	}
-	//map->SetMap(mapid);
 	f.close();
 	//introbackground
 	introbackground->SetPosition((float)CGame::GetInstance()->GetBackBufferWidth() / 2, (float)-CGame::GetInstance()->GetBackBufferHeight());
 	objects.push_back(introbackground);
+	//number
+	numberIntro->SetPosition((float)CGame::GetInstance()->GetBackBufferWidth() / 2, -(float)CGame::GetInstance()->GetBackBufferHeight());
+	objects.push_back(numberIntro);
 	//options
 	option->SetPosition((float)CGame::GetInstance()->GetBackBufferWidth() / 2, (float)-CGame::GetInstance()->GetBackBufferHeight());
 	objects.push_back(option);
 	//curtain
-	curtain->SetPosition((float)CGame::GetInstance()->GetBackBufferWidth() / 2, (float)CGame::GetInstance()->GetBackBufferHeight() / 2 - TEN * 2);
+	curtain->SetPosition((float)CGame::GetInstance()->GetBackBufferWidth() / 2, (float)CGame::GetInstance()->GetBackBufferHeight() / 2 - RANGE_Y * 2);
 	objects.push_back(curtain);
 	DebugOut(L"[INFO] Done loading scene  %s\n", sceneFilePath);
 }
@@ -223,52 +226,57 @@ void IntroScene::ScriptIntro()
 	if (SequenceTime == 0)
 		SequenceTime = (DWORD)GetTickCount64();
 	
-	if (!isDoneSeq1)
+	if (!isFinish1)
 	{
-		if (GetTickCount64() - SequenceTime >= 1000)
+		if (GetTickCount64() - SequenceTime >= TIME_CURTAIN)
 		{
 			if (curtain->GetState() == 0)
 			{
 				SequenceTime = (DWORD)GetTickCount64();
 				curtain->SetState(CURTAIN_STATE_MOVING);
-				isDoneSeq1 = true;
+				isFinish1 = true;
 			}
 		}
 	}
 
-	if (isDoneSeq1 && !isDoneSeq2)
+	if (isFinish1 && !isFinish2)
 	{
-		if (GetTickCount64() - SequenceTime >= 500)
+		if (GetTickCount64() - SequenceTime >= TIME_BACKGROUND)
 		{
 			if (introbackground->GetState() == 0)
 			{
-				SequenceTime = (DWORD)GetTickCount64();
 				introbackground->SetState(BACKGROUND_STATE_MOVING);
-				isDoneSeq2 = true;
+				isFinish2 = true;
+				SequenceTime = (DWORD)GetTickCount64();
 			}
 		}
 	}
 
-	if (isDoneSeq2 && !isDoneSeq3)
+	if (isFinish2 && !isFinish3)
 	{
-		if (GetTickCount64() - SequenceTime >= 3000)
+		if (GetTickCount64() - SequenceTime >= TIME_NUMBER)
+		{
+			SequenceTime = DWORD(GetTickCount64());
+			numberIntro->SetPosition((float)CGame::GetInstance()->GetBackBufferWidth() / 2, -(float)CGame::GetInstance()->GetBackBufferHeight() / 2 + NUMBER_OFFSET);
+			isFinish3 = true;
+		}
+	}
+
+	if (isFinish3 && !isFinish4)
+	{
+		if (GetTickCount64() - SequenceTime >= TIME_OPTION)
 		{
 			if (option->GetState() == 0)
 			{
 				SequenceTime = (DWORD)GetTickCount64();
-				option->SetState(OPTION_STATE_MOVING);
-				isDoneSeq3 = true;
+				option->SetPosition((float)CGame::GetInstance()->GetBackBufferWidth() / 2, -(float)CGame::GetInstance()->GetBackBufferHeight() / 2 + OPTION_OFFSET);
+				CGame::GetInstance()->allowKeyboard = true;
+				isFinish4 = true;
 			}
 		}
 	}
 
-	if (isDoneSeq3 && !isDoneSeq4)
-	{
-		if (GetTickCount64() - SequenceTime >= 5000)
-		{
-			CGame::GetInstance()->InitiateSwitchScene(1);
-		}
-	}
+
 }
 
 /*

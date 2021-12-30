@@ -28,6 +28,7 @@
 #include "Curtain.h"
 #include "IntroBG.h"
 #include "IntroOption.h"
+#include "IntroNumber.h"
 //#include "GreenMario.h"
 
 //#include "Number3.h"
@@ -55,11 +56,12 @@ public:
 	LPCWSTR path;
 	//Number3* num3;
 	Curtain* curtain = new Curtain(0, 0);
-	IntroBG* introbackground = new IntroBG((float)CGame::GetInstance()->GetBackBufferWidth() / 2,(float) -CGame::GetInstance()->GetBackBufferHeight() / 2);
+	IntroBG* introbackground = new IntroBG((float)CGame::GetInstance()->GetBackBufferWidth() / 2,(float)-CGame::GetInstance()->GetBackBufferHeight() / 2);
 	IntroOption* option = IntroOption::GetInstance();
+	IntroNumber* numberIntro = new IntroNumber((float)CGame::GetInstance()->GetBackBufferWidth() / 2, (float)-CGame::GetInstance()->GetBackBufferHeight() / 2);
 	DWORD SequenceTime = 0;
 	IntroScene(int id, LPCWSTR filePath);
-	bool isDoneSeq1, isDoneSeq2, isDoneSeq3, isDoneSeq4, isDoneSeq5;
+	bool isFinish1, isFinish2, isFinish3, isFinish4, isFinish5;
 	virtual void Load();
 	virtual void Update(DWORD dt);
 	virtual void Render();

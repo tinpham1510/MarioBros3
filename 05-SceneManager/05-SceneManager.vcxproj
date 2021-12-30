@@ -162,6 +162,7 @@
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Intro.cpp" />
     <ClCompile Include="IntroBG.cpp" />
+    <ClCompile Include="IntroNumber.cpp" />
     <ClCompile Include="IntroOption.cpp" />
     <ClCompile Include="Koopas.cpp" />
     <ClCompile Include="KoopasFly.cpp" />
@@ -208,6 +209,7 @@
     <ClInclude Include="HUD.h" />
     <ClInclude Include="Intro.h" />
     <ClInclude Include="IntroBG.h" />
+    <ClInclude Include="IntroNumber.h" />
     <ClInclude Include="IntroOption.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="KeyEventHandler.h" />

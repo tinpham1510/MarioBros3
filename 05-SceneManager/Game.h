@@ -61,6 +61,7 @@ class CGame
 
 public:
 	int current_scene;
+	bool allowKeyboard;
 	float nextX = 0.0f, nextY = 0.0f;
 	// Init DirectX, Sprite Handler
 	void Init(HWND hWnd, HINSTANCE hInstance);
