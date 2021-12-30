@@ -1,5 +1,5 @@
 [SETTINGS]
-start	1
+start	3
 width	320
 height	240
 
@@ -9,7 +9,7 @@ height	240
 0	intro.txt
 1	scene02.txt
 2	HiddenWorld.txt
-
+3	intro.txt
 
 # id	file 
 [TEXTURES]
@@ -23,9 +23,12 @@ height	240
 20	textures\misc.png
 30	textures\Map1-1.png
 31	textures\Map1-hidden.png
+32	textures\Map-intro.png
 40	textures\misc1.png
 50	textures\pipe.png
 51	textures\pipe1.png
 64	textures\itemHud.png
 65	textures\HUD.png
 70	textures\endgame.png
+80	textures\intro1.png
+81	textures\title.png

@@ -1,6 +1,16 @@
 # id	left	top	right	bottom	texture_id
 [SPRITES]
+# Curtain
 68000	0	0	316	176	80
+#Background Black
+68001	343	1	663	171	80
+#Background color
+68002	0	0	300	186	81
+#Number
+
+
 # ani_id	sprite1_id	time1	sprite2_id	time2	...
 [ANIMATIONS]
 18000	68000	100
+18001	68001	100
+18002	68002	100

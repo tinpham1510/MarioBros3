@@ -271,7 +271,7 @@ public:
 	CMario(float x, float y) : CGameObject(x, y)
 	{
 		isSitting = false;
-		isKicking =  isPressed = isChangingScene = isAttacking = isFlying = isHoldKoopas = isEnd = false;
+		isKicking =  isPressed = isFalling = isChangingScene = isAttacking = isFlying = isHoldKoopas = isEnd = false;
 		maxVx = 0.0f;
 		ax = 0.0f;
 		ay = MARIO_GRAVITY; 
@@ -281,7 +281,7 @@ public:
 		isOnPlatform = false;
 		coin = 0;
 		type = 0;
-		timeStack = timeAttacking = timeFlying = timeFalling = powerStack = timeEnd = 0;
+		timeStack = timeAttacking = timeFlying = timeFalling = powerStack = timeEnd = timeKick = timeSwitch = 0;
 		tail = NULL;
 		fire = new FireBullet(x + 30, y);
 	}

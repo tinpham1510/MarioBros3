@@ -26,6 +26,7 @@
 #include "EndGame.h"
 #include "Map.h"
 #include "Curtain.h"
+#include "IntroBG.h"
 //#include "GreenMario.h"
 ////#include "IntroOption.h"
 //#include "Number3.h"
@@ -50,18 +51,11 @@ protected:
 
 	void _ParseSection_MAP(string line);
 public:
-	int mapid;
 	LPCWSTR path;
-	CMario* redMario;
-	//GreenMario* greenMario;
 	//Number3* num3;
 	CBrick* brick = new CBrick(5, 195);
-	//IntroOption* option = IntroOption::GetInstance();
-	//IntroBackGround* introbackground = new IntroBackGround(CGame::GetInstance()->GetBackBufferWidth() / 2, -CGame::GetInstance()->GetBackBufferHeight() / 2);
-	//CMario* redMario = new CMario(0, 0);
-	//CMario* greenMario = new CMario(0, 0);
 	Curtain* curtain = new Curtain(0, 0);
-	//Leaf* leaf = new Leaf(CGame::GetInstance()->GetBackBufferWidth() / 2, 0);
+	IntroBG* introbackground = new IntroBG((float)CGame::GetInstance()->GetBackBufferWidth() / 2,(float) -CGame::GetInstance()->GetBackBufferHeight() / 2);
 	DWORD SequenceTime = 0;
 	IntroScene(int id, LPCWSTR filePath);
 	bool isDoneSeq1, isDoneSeq2, isDoneSeq3, isDoneSeq4, isDoneSeq5;

@@ -152,12 +152,12 @@ void IntroScene::Load()
 		case SCENE_SECTION_MAPS: _ParseSection_MAP(line); break;
 		}
 	}
-	DebugOut(L"mapid:%d", mapid);
 	//map->SetMap(mapid);
 	f.close();
 	//introbackground
-	/*introbackground->SetPosition(CGame::GetInstance()->GetBackBufferWidth() / 2, -CGame::GetInstance()->GetBackBufferHeight());
+	introbackground->SetPosition((float)CGame::GetInstance()->GetBackBufferWidth() / 2, (float)-CGame::GetInstance()->GetBackBufferHeight());
 	objects.push_back(introbackground);
+	/*
 	NUMBER3
 	num3 = new Number3(0, 0);
 	num3->SetPosition(CGame::GetInstance()->GetBackBufferWidth() / 2, -CGame::GetInstance()->GetBackBufferHeight());
@@ -228,7 +228,7 @@ void IntroScene::Update(DWORD dt)
 
 
 	// Update camera to follow mario
-	float cx, cy;
+
 	ScriptIntro();
 
 	CGame::GetInstance()->SetCamPos(0, 0);
@@ -251,15 +251,31 @@ void IntroScene::ScriptIntro()
 	
 	if (!isDoneSeq1)
 	{
-		if (GetTickCount64() - SequenceTime >= 2000)
+		if (GetTickCount64() - SequenceTime >= 1000)
 		{
 			if (curtain->GetState() == 0)
 			{
+				SequenceTime = (DWORD)GetTickCount64();
 				curtain->SetState(CURTAIN_STATE_MOVING);
 				isDoneSeq1 = true;
 			}
 		}
 	}
+
+	if (isDoneSeq1 && !isDoneSeq2)
+	{
+		if (GetTickCount64() - SequenceTime >= 500)
+		{
+			if (introbackground->GetState() == 0)
+			{
+				SequenceTime = (DWORD)GetTickCount64();
+				introbackground->SetState(BACKGROUND_STATE_MOVING);
+				isDoneSeq2 = true;
+			}
+		}
+	}
+
+
 
 }
 
