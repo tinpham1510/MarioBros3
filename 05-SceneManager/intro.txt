@@ -1,0 +1,25 @@
+# list of object assets to load in this scene
+[ASSETS]
+mario.txt
+cloud.txt
+brick.txt
+questionBrick.txt
+goomba.txt
+koopas.txt
+koopasFly.txt
+goombaRed.txt
+fireplant.txt
+pipe.txt
+hud.txt
+item.txt
+curtain.txt
+#
+[OBJECTS]
+# type	x	y	extra_settings per object type
+# type: 0 = Mario , 1 = Brick, 2 = Goomba, 3 = Koopas
+# See OBJECT_TYPE constants in AssetIDs.h
+
+
+
+[MAP]
+32	map-intro.txt	16	19	11	11	0

@@ -7,6 +7,7 @@
 #include "Texture.h"
 #include "Animations.h"
 #include "PlayScene.h"
+#include "Intro.h"
 
 CGame* CGame::__instance = NULL;
 
@@ -385,6 +386,8 @@ void CGame::ProcessKeyboard()
 {
 	HRESULT hr;
 
+	if (current_scene == 3)
+		return;
 	// Collect all key states first
 	hr = didv->GetDeviceState(sizeof(keyStates), keyStates);
 	if (FAILED(hr))
@@ -457,8 +460,16 @@ void CGame::_ParseSection_SCENES(string line)
 	int id = atoi(tokens[0].c_str());
 	LPCWSTR path = ToLPCWSTR(tokens[1]);   // file: ASCII format (single-byte char) => Wide Char
 
-	LPSCENE scene = new CPlayScene(id, path);
-	scenes[id] = scene;
+	if (id != 3)
+	{
+		LPSCENE scene = new CPlayScene(id, path);
+		scenes[id] = scene;
+	}
+	else
+	{
+		LPSCENE scene = new IntroScene(id, path);
+		scenes[id] = scene;
+	}
 }
 
 /*

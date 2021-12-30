@@ -156,6 +156,15 @@
     <ClCompile Include="EndGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Intro.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Curtain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroBG.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collision.h">
@@ -287,6 +296,15 @@
     <ClInclude Include="EndGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Intro.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Curtain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IntroBG.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="pipe.txt">
@@ -305,5 +323,8 @@
     <Text Include="scene-mario.txt" />
     <Text Include="firebullet.txt" />
     <Text Include="endgame.txt" />
+    <Text Include="intro.txt" />
+    <Text Include="map-intro.txt" />
+    <Text Include="curtain.txt" />
   </ItemGroup>
 </Project>

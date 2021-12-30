@@ -151,6 +151,7 @@
     <ClCompile Include="Coin.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="ColorBox.cpp" />
+    <ClCompile Include="Curtain.cpp" />
     <ClCompile Include="debug.cpp" />
     <ClCompile Include="EndGame.cpp" />
     <ClCompile Include="FireBullet.cpp" />
@@ -159,6 +160,8 @@
     <ClCompile Include="Goomba.cpp" />
     <ClCompile Include="GoombaRed.cpp" />
     <ClCompile Include="HUD.cpp" />
+    <ClCompile Include="Intro.cpp" />
+    <ClCompile Include="IntroBG.cpp" />
     <ClCompile Include="Koopas.cpp" />
     <ClCompile Include="KoopasFly.cpp" />
     <ClCompile Include="KoopasObject.cpp" />
@@ -193,6 +196,7 @@
     <ClInclude Include="Coin.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="ColorBox.h" />
+    <ClInclude Include="Curtain.h" />
     <ClInclude Include="debug.h" />
     <ClInclude Include="EndGame.h" />
     <ClInclude Include="FireBullet.h" />
@@ -201,6 +205,8 @@
     <ClInclude Include="Goomba.h" />
     <ClInclude Include="GoombaRed.h" />
     <ClInclude Include="HUD.h" />
+    <ClInclude Include="Intro.h" />
+    <ClInclude Include="IntroBG.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="KeyEventHandler.h" />
     <ClInclude Include="Koopas.h" />
@@ -228,11 +234,14 @@
     <ClInclude Include="FirePlant.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="curtain.txt" />
     <Text Include="endgame.txt" />
     <Text Include="firebullet.txt" />
     <Text Include="HiddenWorld.txt" />
     <Text Include="hud.txt" />
+    <Text Include="intro.txt" />
     <Text Include="item.txt" />
+    <Text Include="map-intro.txt" />
     <Text Include="pipe.txt" />
     <Text Include="fireplant.txt" />
     <Text Include="scene-mario.txt" />
