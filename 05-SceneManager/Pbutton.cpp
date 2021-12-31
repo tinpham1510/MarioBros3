@@ -22,7 +22,7 @@ void Pbutton::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	y += vy * dt;
 	if (state == PBUTTON_STATE_NORMAL)
 	{
-		if (first_y - y >= 13)
+		if (first_y - y >= PBUTTON_Y)
 		{
 			vy = 0;
 		}
@@ -54,7 +54,7 @@ void Pbutton::SetState(int state)
 	case PBUTTON_STATE_APPEAR:
 		break;
 	case PBUTTON_STATE_NORMAL:
-		vy -= 0.2f;
+		vy = -PBUTTON_VY;
 		break;
 	case PBUTTON_STATE_COLLISION:
 		y += POSITION_Y;

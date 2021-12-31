@@ -7,6 +7,12 @@
 #include "PlayScene.h"
 #include "IntroOption.h"
 #include "Intro.h"
+
+#define X_POSITION	2260
+#define Y_POSITION	60
+
+#define X_POSITION_LASTITEM	2500
+#define X_POSITION_BRICK	2000
 void CSampleKeyHandler::OnKeyDown(int KeyCode)
 {
 	//DebugOut(L"[INFO] KeyDown: %d\n", KeyCode);
@@ -39,7 +45,10 @@ void CSampleKeyHandler::OnKeyDown(int KeyCode)
 		switch (KeyCode)
 		{
 		case DIK_DOWN:
-			mario->SetState(MARIO_STATE_SIT);
+			if (!mario->isHoldKoopas)
+			{
+				mario->SetState(MARIO_STATE_SIT);
+			}
 			break;
 		case DIK_S:
 			if (mario->powerStack == MARIO_MAX_POWER)
@@ -74,7 +83,16 @@ void CSampleKeyHandler::OnKeyDown(int KeyCode)
 			mario->SetState(MARIO_STATE_ATTACK);
 			break;
 		case DIK_R: // reset
-			//Reload();
+			mario->Reset();
+			break;
+		case DIK_H:
+			mario->SetPosition(X_POSITION, Y_POSITION);
+			break;
+		case DIK_G:
+			mario->SetPosition(X_POSITION_LASTITEM, Y_POSITION);
+			break;
+		case DIK_J:
+			mario->SetPosition(X_POSITION_BRICK, Y_POSITION);
 			break;
 		}
 	}

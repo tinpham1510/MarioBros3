@@ -5,11 +5,12 @@
 #include "Animations.h"
 
 #define TAIL_BBOX_WIDTH 8
-#define TAIL_BBOX_HEIGHT 5
+#define TAIL_BBOX_HEIGHT 3
 
 class CTail : public CGameObject {
 public:
 	//int nx;
+	bool isAttacked = false;
 	CTail(float x, float y) {};
 	virtual void GetBoundingBox(float& left, float& top, float& right, float& bottom);
 	virtual void Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects);

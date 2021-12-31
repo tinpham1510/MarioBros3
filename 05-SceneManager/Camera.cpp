@@ -1,5 +1,5 @@
 #include "Camera.h"
-
+#include "Mario.h"
 #define ScreenH	16
 Camera* Camera::__instance;
 CGame* game = CGame::GetInstance();
@@ -25,6 +25,11 @@ void Camera::SetPosition(float& cam_x, float& cam_y)
 	Cam_y = cam_y;
 	Cam_y -= (float)game->GetBackBufferHeight() / 2;
 	float ScreenY = mapheight - Height - ScreenH;
+
+	if (CMario::GetInstance()->isFlying)
+	{
+		ScreenY = mapheight - Height;
+	}
 
 	if (cam_y > ScreenY) {
 		Cam_y = cam_y;

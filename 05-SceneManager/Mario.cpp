@@ -45,7 +45,16 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 {
 	vy += ay * dt;
 	vx += ax * dt;
+	if (x < FIRST_POSITION)
+	{
+		x = FIRST_POSITION;
+	}
 	
+	if (y > HEIGHT_POSITION)
+	{
+		SetState(MARIO_STATE_DIE);
+	}
+
 	if (state != MARIO_STATE_IDLE)
 		vx += ax * dt;
 
@@ -71,7 +80,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 	if (isFalling)
 	{
-		if (GetTickCount64() - timeFalling > 200)
+		if (GetTickCount64() - timeFalling > TIME_TWO)
 		{
 			isFalling = false;
 			SetState(MARIO_STATE_RELEASE_JUMP);
@@ -107,7 +116,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 
 	if (isAttacking)
 	{
-		tail->SetPosition((nx < 0) ? (x - MARIO_BIG_BBOX_WIDTH / 2 - TAIL_BBOX_WIDTH / 2) : (x + MARIO_BIG_BBOX_WIDTH / 2 + TAIL_BBOX_WIDTH / 2), y + 6);
+		tail->SetPosition((nx < 0) ? (x - MARIO_BIG_BBOX_WIDTH / 2 - TAIL_BBOX_WIDTH / 2) : (x + MARIO_BIG_BBOX_WIDTH / 2 + TAIL_BBOX_WIDTH / 2), y + Y_TAIL);
 		tail->SetDirect(nx);
 		if (GetTickCount64() - timeAttacking > MARIO_TIME_ATTACKING)
 		{
@@ -143,6 +152,37 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 			SetState(MARIO_STATE_WALKING_RIGHT);
 		}
 	}
+
+	for (int i = 0; i < coObjects->size(); i++)
+	{
+		if (CCollision::GetInstance()->CheckAABB(this, coObjects->at(i)))
+		{
+				if (dynamic_cast<CMushroom*>(coObjects->at(i)))
+				{
+					if (level > MARIO_LEVEL_RACOON)
+					{
+						level++;
+					}
+					coObjects->at(i)->Delete();
+				}
+				else if (dynamic_cast<Leaf*>(coObjects->at(i)))
+				{
+					if (level > MARIO_LEVEL_RACOON)
+					{
+						level++;
+					}
+					coObjects->at(i)->Delete();
+				}
+			
+		}
+	}
+
+	if (tail->isAttacked)
+	{
+		DebugOut(L"true\n");
+	}
+	else
+		DebugOut(L"false\n");
 
 	CCollision::GetInstance()->Process(this, dt, coObjects);
 	if (isHoldKoopas)
@@ -270,13 +310,6 @@ void CMario::OnCollisionWithB(LPCOLLISIONEVENT e)
 			cb->SetState(BRICK_STATE_BROKEN);
 		}
 	}
-	else if (isAttacking && e->nx != 0)
-	{
-		if (cb->GetState() != BRICK_STATE_BROKEN)
-		{
-			cb->SetState(BRICK_STATE_BROKEN);
-		}
-	}
 	
 	
 	if (cb->GetState() == BRICK_STATE_CHANGE_COIN)
@@ -347,13 +380,7 @@ void CMario::OnCollisionWithQB(LPCOLLISIONEVENT e) {
 		}
 		
 	}
-	else if (isAttacking && e->nx !=0)
-	{
-		if (brick->GetState() != QUESTIONBRICK_STATE_EMP)
-		{
-			brick->SetState(QUESTIONBRICK_STATE_COLISION);
-		}
-	}
+
 }
 
 
@@ -1037,7 +1064,7 @@ void CMario::SetState(int state)
 		nx = -1;
 		break;
 	case MARIO_STATE_JUMP:
-		if (isSitting) break;
+		//if (isSitting) break;
 		if (isOnPlatform)
 		{
 			if (abs(this->vx) == MARIO_RUNNING_SPEED)
@@ -1131,9 +1158,9 @@ void CMario::SetState(int state)
 	case MARIO_STATE_ATTACK:
 		if (level == MARIO_LEVEL_RACOON && !isSitting)
 		{
-			vx = 0;
 			isAttacking = true;
 			timeAttacking = GetTickCount64();
+			tail->isAttacked = true;
 		}
 		break;
 	case MARIO_STATE_HOLDING:

@@ -403,6 +403,7 @@ void CPlayScene::Update(DWORD dt)
 	float cx, cy;
 	
 	player->GetPosition(cx, cy);
+	
 	camera->SetPosition(cx, cy);
 
 	CGame *game = CGame::GetInstance();

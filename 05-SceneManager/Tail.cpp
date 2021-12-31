@@ -10,10 +10,13 @@
 
 void CTail::GetBoundingBox(float& left, float& top, float& right, float& bottom)
 {
-	left = x - TAIL_BBOX_WIDTH / 2;
-	top = y - TAIL_BBOX_HEIGHT / 2;
-	right = left + TAIL_BBOX_WIDTH + 2;
-	bottom = top + TAIL_BBOX_HEIGHT;
+	if (isAttacked)
+	{
+		left = x - TAIL_BBOX_WIDTH / 2;
+		top = y - TAIL_BBOX_HEIGHT / 2;
+		right = left + TAIL_BBOX_WIDTH + 2;
+		bottom = top + TAIL_BBOX_HEIGHT;
+	}
 }
 
 void CTail::OnNoCollision(DWORD dt) {
@@ -41,7 +44,7 @@ void CTail::OnCollisionWithGoomba(LPGAMEOBJECT& e)
 		else
 			gb->SetSpeed(-GOOMBA_REFLECT_BY_ATTACKING_SPEED, 0);
 	}
-
+	isAttacked = false;
 }
 
 void CTail::OnCollisionWithGoombaRed(LPGAMEOBJECT& e)
@@ -60,6 +63,7 @@ void CTail::OnCollisionWithGoombaRed(LPGAMEOBJECT& e)
 				rg->SetSpeed(-GOOMBA_REFLECT_BY_ATTACKING_SPEED, 0);
 		}
 	}
+	isAttacked = false;
 }
 
 void CTail::OnCollisionWithKoopas(LPGAMEOBJECT& e)
@@ -70,6 +74,7 @@ void CTail::OnCollisionWithKoopas(LPGAMEOBJECT& e)
 		kp->nx = nx;
 		kp->SetState(KOOPAS_STATE_SHELL_UP);
 	}
+	isAttacked = false;
 
 }
 
@@ -77,13 +82,14 @@ void CTail::OnCollisionWithQB(LPGAMEOBJECT& e)
 {
 	CQuestionBrick* qb = dynamic_cast<CQuestionBrick*>(e);
 	qb->SetState(QUESTIONBRICK_STATE_COLISION);
+	isAttacked = false;
 }
 
 void CTail::OnCollisionWithB(LPGAMEOBJECT& e)
 {
 	CBrick* qb = dynamic_cast<CBrick*>(e);
 	qb->SetState(BRICK_STATE_BROKEN);
-
+	isAttacked = false;
 
 }
 
@@ -91,6 +97,7 @@ void CTail::OnCollisionWithFirePlant(LPGAMEOBJECT& e)
 {
 	CFirePlant* fp = dynamic_cast <CFirePlant*>(e);
 	fp->Delete();
+	isAttacked = false;
 }
 
 void CTail::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
@@ -119,5 +126,5 @@ void CTail::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects) {
 
 void CTail::Render()
 {
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }
