@@ -46,7 +46,7 @@
 #define MARIO_MAX_POWER	7
 
 #define FIRST_POSITION	10
-#define HEIGHT_POSITION	500
+#define HEIGHT_POSITION	400
 
 #define Y_TAIL	6
 

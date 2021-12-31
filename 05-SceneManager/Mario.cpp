@@ -49,11 +49,7 @@ void CMario::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
 	{
 		x = FIRST_POSITION;
 	}
-	
-	if (y > HEIGHT_POSITION)
-	{
-		SetState(MARIO_STATE_DIE);
-	}
+
 
 	if (state != MARIO_STATE_IDLE)
 		vx += ax * dt;
